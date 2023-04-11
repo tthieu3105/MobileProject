@@ -22,7 +22,7 @@ class LoginScreen extends Component {
           flex: 1,
         }}
       >
-        <View style={{ flex: 55, backgroundColor: "white" }}>
+        <View style={{ flex: 50, backgroundColor: "white" }}>
           <Image
             style={styles.image}
             source={require("../Pic/welcomePic.png")}
