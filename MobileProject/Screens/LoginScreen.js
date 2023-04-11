@@ -70,8 +70,8 @@ class LoginScreen extends Component {
 
 const styles = StyleSheet.create({
   image: {
-    height: 300,
-    width: 300,
+    height: "65%",
+    width: "75%",
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
