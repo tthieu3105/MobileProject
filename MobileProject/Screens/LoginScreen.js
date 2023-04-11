@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 13,
     textDecorationLine: "underline",
-    marginTop: 0,
   },
 
   textInButton: {
