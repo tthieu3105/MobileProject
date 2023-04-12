@@ -31,7 +31,7 @@ class LoginScreen extends Component {
         </View>
 
         <View style={{ flex: 20, backgroundColor: "white" }}>
-          <TouchableOpacity style={styles.insertBox1}>
+          <TouchableOpacity style={styles.insertBox}>
             <TextInput
               style={styles.textInInsertBox}
               placeholder="Username or Email"
@@ -39,7 +39,7 @@ class LoginScreen extends Component {
             ></TextInput>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.insertBox2}>
+          <TouchableOpacity style={styles.insertBox}>
             <TextInput
               style={styles.textInInsertBox}
               placeholder="Password"
