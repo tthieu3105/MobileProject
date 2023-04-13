@@ -7,12 +7,14 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from "react-native";
+
 import React, { Component } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { ScrollView } from "react-native-gesture-handler";
 import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
 import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
+
 class CreateAccountScreen extends Component {
   render() {
     return (
@@ -31,7 +33,8 @@ class CreateAccountScreen extends Component {
           >
             {/* Layout button back, title và hình ảnh */}
             <View style={{ flex: 40, backgroundColor: "white" }}>
-              <View>
+              <View style={styles.row}>
+                {/* Button: back to previous screen */}
                 <TouchableOpacity>
                   <AntDesign
                     name="left"
@@ -39,14 +42,14 @@ class CreateAccountScreen extends Component {
                     style={styles.arrowIcon}
                   ></AntDesign>
                 </TouchableOpacity>
+                {/* Title */}
                 <Text style={styles.title}>Create your account</Text>
               </View>
-
+              {/* Picture */}
               <Image
                 style={styles.image}
                 source={require("../Pic/WelcomeCreate.png")}
               ></Image>
-              <View></View>
             </View>
 
             {/* Layout điền tên */}
@@ -112,6 +115,11 @@ class CreateAccountScreen extends Component {
 
 const styles = StyleSheet.create({
   arrowIcon: {
+    marginTop: 45,
+    marginLeft: 10,
+  },
+
+  row: {
     flexDirection: "row",
   },
 
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginLeft: "auto",
+    marginLeft: 20,
     marginRight: "auto",
     color: "#363942",
     fontSize: 27,
