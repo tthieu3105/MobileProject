@@ -5,6 +5,7 @@ import CreateAccountScreen from "../Screens/CreateAccScreen.js";
 import AddEmailVerify from "../Screens/AddEmailVerify.js";
 import EnterVerifyCode from "../Screens/EnterVerifyCode.js";
 import AddNoteScreen from "../Screens/AddNoteScreen.js";
+import CalendarScreen from "../Screens/CalendarScreen.js";
 
 const Stack = createStackNavigator();
 function StackNavigator() {
@@ -12,7 +13,7 @@ function StackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
-        component={AddNoteScreen}
+        component={CreateAccountScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -6,85 +6,143 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Animated,
 } from "react-native";
 
-import React, { Component } from "react";
+import React, { Component, useEffect, useRef } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { ScrollView } from "react-native-gesture-handler";
 import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
 import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 
-class AddEmailVerify extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          backgroundColor: "white",
-          flex: 1,
-        }}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.container}
-          enabled
-          keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-        >
-          <ScrollView>
-            <View
-              style={{
-                backgroundColor: "white",
-                flex: 1,
-              }}
-            >
-              {/* Layout title, back button, picture */}
-              <View style={{ flex: 50, backgroundColor: "white" }}>
-                <View style={styles.row}>
-                  {/* Button: back to previous screen */}
-                  <TouchableOpacity>
-                    <AntDesign
-                      name="left"
-                      size={30}
-                      style={styles.arrowIcon}
-                    ></AntDesign>
-                  </TouchableOpacity>
-                  {/* Title */}
-                  <Text style={styles.title}>Verify your email</Text>
-                </View>
-                {/* Picture */}
-                <Image
-                  style={styles.image}
-                  source={require("../Pic/VerifyEmail1.png")}
-                ></Image>
-              </View>
+const CONTAINER_HEIGHT = 80;
 
-              {/* Layout email, direction, button next */}
-              <View style={{ flex: 50, backgroundColor: "white" }}>
-                <Text style={styles.smallTitle}>Email</Text>
-                <TouchableOpacity style={styles.insertBox}>
-                  <TextInput
-                    style={styles.textInInsertBox}
-                    placeholder="Enter your email"
-                    placeholderTextColor={Colors.placeholder}
-                  ></TextInput>
-                </TouchableOpacity>
-                <Text style={styles.direction}>Please enter your email to</Text>
-                <Text style={styles.ContinueDirection}>
-                  receive a verification code
-                </Text>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={styles.textInButton}>Next</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    );
-  }
-}
+const AddEmailVerify = () => {
+  // Header Animation
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const offsetAnim = useRef(new Animated.Value(0)).current;
+  const clampedScroll = Animated.diffClamp(
+    Animated.add(
+      scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: "clamp",
+      }),
+      offsetAnim
+    ),
+    0,
+    CONTAINER_HEIGHT
+  );
+
+  var _clampedScrollValue = 0;
+  var _offsetValue = 0;
+  var _scrollValue = 0;
+  useEffect(() => {
+    scrollY.addListener(({ value }) => {
+      const diff = value - _scrollValue;
+      _scrollValue = value;
+      _clampedScrollValue = Math.min(
+        Math.max(_clampedScrollValue * diff, 0),
+        CONTAINER_HEIGHT
+      );
+    });
+    offsetAnim.addListener(({ value }) => {
+      _offsetValue = value;
+    });
+  }, []);
+
+  const headerTranslate = clampedScroll.interpolate({
+    inputRange: [0, CONTAINER_HEIGHT],
+    outputRange: [0, -CONTAINER_HEIGHT],
+    extrapolate: "clamp",
+  });
+  // End of header animation
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ backgroundColor: "white" }}
+      enabled
+      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+    >
+      <Animated.View
+        style={[
+          styles.header,
+          { transform: [{ translateY: headerTranslate }] },
+        ]}
+      >
+        <View style={styles.row}>
+          {/* Button: back to previous screen */}
+          <TouchableOpacity>
+            <AntDesign
+              name="left"
+              size={30}
+              style={styles.arrowIcon}
+            ></AntDesign>
+          </TouchableOpacity>
+          {/* Title */}
+          <Text style={styles.title}>Verify your email</Text>
+        </View>
+      </Animated.View>
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
+      >
+        <View
+          style={{
+            backgroundColor: "white",
+            flex: 80,
+          }}
+        >
+          {/* Layout title, back button, picture */}
+          <View style={{ flex: 50, backgroundColor: "white" }}>
+            {/* Picture */}
+            <Image
+              style={styles.image}
+              source={require("../Pic/VerifyEmail1.png")}
+            ></Image>
+          </View>
+
+          {/* Layout email, direction, button next */}
+          <View style={{ flex: 50, backgroundColor: "white" }}>
+            <Text style={styles.smallTitle}>Email</Text>
+            <TouchableOpacity style={styles.insertBox}>
+              <TextInput
+                style={styles.textInInsertBox}
+                placeholder="Enter your email"
+                placeholderTextColor={Colors.placeholder}
+              ></TextInput>
+            </TouchableOpacity>
+            <Text style={styles.direction}>Please enter your email to</Text>
+            <Text style={styles.ContinueDirection}>
+              receive a verification code
+            </Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.textInButton}>Next</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Animated.ScrollView>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
+  header: {
+    position: "absolute",
+    width: "100%",
+    height: CONTAINER_HEIGHT,
+    left: 0,
+    right: 0,
+    top: 0,
+    backgroundColor: "white",
+    zIndex: 1000,
+    elevation: 1000,
+  },
+
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
@@ -100,7 +158,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 35,
+    marginTop: 85,
   },
 
   title: {
@@ -154,7 +212,7 @@ const styles = StyleSheet.create({
     shadowColor: "gray",
     shadowOpacity: 10,
     marginHorizontal: 15,
-    marginBottom: 30,
+    marginBottom: 180,
   },
 
   buttonCreateAccount: {
