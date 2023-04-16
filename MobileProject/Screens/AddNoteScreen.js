@@ -7,7 +7,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from "react-native";
-
+import Constants from "expo-constants";
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -15,6 +15,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
 import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
+import UserAvatar from "@muhzi/react-native-user-avatar";
 
 const AddNoteScreen = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -23,8 +24,13 @@ const AddNoteScreen = () => {
   useEffect(() => {
     // Lấy ngày tháng năm hiện tại và định dạng thành chuỗi
     const date = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-US", options);
 
     // Cập nhật state currentDate
     setCurrentDate(formattedDate);
@@ -48,6 +54,14 @@ const AddNoteScreen = () => {
               </TouchableOpacity>
 
               {/* small avatar */}
+
+              <View style={styles.separator}>
+                <UserAvatar
+                  size={40}
+                  active
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2900&q=80"
+                />
+              </View>
             </View>
 
             {/* Title */}
@@ -97,7 +111,7 @@ const AddNoteScreen = () => {
 
 const styles = StyleSheet.create({
   arrowIcon: {
-    marginTop: 45,
+    marginTop: 10,
     marginLeft: 10,
     marginBottom: 30,
   },
@@ -219,6 +233,20 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: "auto",
     height: 340,
+  },
+
+  separator: {
+    marginTop: 10,
+    marginRight: 25,
+    marginLeft: "auto",
+  },
+
+  container: {
+    // alignItems: "center",
+    // justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "white",
+    // padding: 8,
   },
 });
 
