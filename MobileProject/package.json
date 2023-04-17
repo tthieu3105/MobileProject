@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@expo-google-fonts/lexend-exa": "^0.2.3",
+    "@expo/vector-icons": "^13.0.0",
+    "@muhzi/react-native-user-avatar": "^1.0.7",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
+    "@tighten/react-native-time-input": "^1.0.3",
     "@types/react-native": "^0.71.5",
     "expo": "~48.0.10",
     "expo-app-loading": "^2.1.1",
@@ -22,6 +25,8 @@
     "react": "18.2.0",
     "react-native": "0.71.6",
     "react-native-gesture-handler": "^2.9.0",
+    "react-native-global-props": "^1.1.5",
+    "react-native-reanimated": "~2.14.4",
     "react-navigation": "^4.4.4"
   },
   "devDependencies": {
