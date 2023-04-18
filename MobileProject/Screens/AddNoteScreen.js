@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 
   headerBehave: {
     padding: 20,
-    marginTop:25,
+    marginTop: 25,
   },
 
   row: {
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     marginTop: "auto",
     marginLeft: 15,
-    marginRight: "auto",
+    marginRight: 15,
   },
 
   textInNoteBox: {

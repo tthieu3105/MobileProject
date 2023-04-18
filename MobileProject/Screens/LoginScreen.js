@@ -1,4 +1,3 @@
-import { setStatusBarBackgroundColor } from "expo-status-bar";
 import {
   View,
   Image,
@@ -6,76 +5,146 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  TextInputProps,
+  KeyboardAvoidingView,
+  Animated,
 } from "react-native";
-import React, { Component } from "react";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
+import React, { Component, useEffect, useRef } from "react";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { ScrollView } from "react-native-gesture-handler";
+import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
+import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
+import { Ionicons } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
+import UserAvatar from "@muhzi/react-native-user-avatar";
+
+const CONTAINER_HEIGHT = 80;
 // class WelcomeScreen extends Component { render() { [...] } }
 
-class LoginScreen extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          backgroundColor: "white",
-          flex: 1,
-        }}
+const LoginScreen = () => {
+  // Header Animation
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const offsetAnim = useRef(new Animated.Value(0)).current;
+  const clampedScroll = Animated.diffClamp(
+    Animated.add(
+      scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: "clamp",
+      }),
+      offsetAnim
+    ),
+    0,
+    CONTAINER_HEIGHT
+  );
+
+  var _clampedScrollValue = 0;
+  var _offsetValue = 0;
+  var _scrollValue = 0;
+  useEffect(() => {
+    scrollY.addListener(({ value }) => {
+      const diff = value - _scrollValue;
+      _scrollValue = value;
+      _clampedScrollValue = Math.min(
+        Math.max(_clampedScrollValue * diff, 0),
+        CONTAINER_HEIGHT
+      );
+    });
+    offsetAnim.addListener(({ value }) => {
+      _offsetValue = value;
+    });
+  }, []);
+
+  const headerTranslate = clampedScroll.interpolate({
+    inputRange: [0, CONTAINER_HEIGHT],
+    outputRange: [0, -CONTAINER_HEIGHT],
+    extrapolate: "clamp",
+  });
+  // End of header animation
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ backgroundColor: "white", flex: 100 }}
+      enabled
+      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+    >
+      <Animated.View
+        style={[
+          styles.header,
+          { transform: [{ translateY: headerTranslate }] },
+        ]}
       >
-        <View style={{ flex: 50, backgroundColor: "white" }}>
-          <Image
-            style={styles.image}
-            source={require("../Pic/welcomePic.png")}
-          ></Image>
-          <Text style={styles.title}> MANAGE YOUR TIME </Text>
-        </View>
+        <Animated.ScrollView
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
+        >
+          <View
+            style={{
+              flex: 100,
+              backgroundColor: "white",
+            }}
+          >
+            <View style={{ flex: 50, backgroundColor: "white" }}>
+              <Image
+                style={styles.image}
+                source={require("../Pic/welcomePic.png")}
+              ></Image>
+              <Text style={styles.title}> MANAGE YOUR TIME </Text>
+            </View>
 
-        <View style={{ flex: 20, backgroundColor: "white" }}>
-          <TouchableOpacity style={styles.insertBox}>
-            <TextInput
-              style={styles.textInInsertBox}
-              placeholder="Username or Email"
-              placeholderTextColor={Colors.placeholder}
-            ></TextInput>
-          </TouchableOpacity>
+            <View style={{ flex: 20, backgroundColor: "white" }}>
+              <TouchableOpacity style={styles.insertBox1}>
+                <TextInput
+                  style={styles.textInInsertBox}
+                  placeholder="Username or Email"
+                  placeholderTextColor={Colors.placeholder}
+                ></TextInput>
+              </TouchableOpacity>
 
-          <TouchableOpacity style={styles.insertBox}>
-            <TextInput
-              style={styles.textInInsertBox}
-              placeholder="Password"
-              placeholderTextColor={Colors.placeholder}
-            ></TextInput>
-          </TouchableOpacity>
+              <TouchableOpacity style={styles.insertBox1}>
+                <TextInput
+                  style={styles.textInInsertBox}
+                  placeholder="Password"
+                  placeholderTextColor={Colors.placeholder}
+                ></TextInput>
+              </TouchableOpacity>
 
-          <TouchableOpacity>
-            <Text style={styles.normalTextOnBackGround}>
-              Forgot your password?
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <TouchableOpacity>
+                <Text style={styles.underlineTextOnBackGround}>
+                  Forgot your password?
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-        <View style={{ flex: 30, backgroundColor: "white" }}>
-          <TouchableOpacity style={styles.buttonLogin}>
-            <Text style={styles.textInButton}>Login</Text>
-          </TouchableOpacity>
+            <View style={{ backgroundColor: "white" }}>
+              <TouchableOpacity style={styles.buttonLogin}>
+                <Text style={styles.textInButton}>Login</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonCreateAccount}>
-            <Text style={styles.textInButton}>Create account</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-}
+              <TouchableOpacity style={styles.buttonCreateAccount}>
+                <Text style={styles.textInButton}>Create account</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Animated.ScrollView>
+      </Animated.View>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
   image: {
-    height: "65%",
-    width: "75%",
+    height: 225,
+    width: 225,
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 80,
+    marginTop: 110,
   },
 
   title: {
@@ -85,10 +154,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 8,
+    marginBottom: 20,
     // fontStyle
   },
 
-  normalTextOnBackGround: {
+  underlineTextOnBackGround: {
     marginLeft: "auto",
     marginRight: 30,
     color: "black",
@@ -126,6 +196,7 @@ const styles = StyleSheet.create({
     shadowColor: "gray",
     shadowOpacity: 10,
     marginHorizontal: 30,
+    marginBottom: 150,
   },
 
   insertBox1: {
@@ -134,18 +205,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 5,
+    shadowOpacity: 2,
     marginHorizontal: 30,
-  },
-
-  insertBox2: {
-    backgroundColor: "#F5F5F5",
-    marginVertical: 10,
-    height: 50,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 5,
-    marginHorizontal: 30,
+    marginTop: 15,
   },
 
   textInInsertBox: {
@@ -154,7 +216,7 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     marginTop: "auto",
     marginLeft: 15,
-    marginRight: "auto",
+    marginRight: 15,
   },
 });
 

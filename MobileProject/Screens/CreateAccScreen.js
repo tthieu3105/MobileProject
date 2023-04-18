@@ -112,6 +112,8 @@ const CreateAccountScreen = () => {
           {/* Layout điền tên */}
           <View style={{ flex: 60, backgroundColor: "white" }}>
             <Text style={styles.smallTitle}>Name</Text>
+
+            {/* Nhập first name */}
             <TouchableOpacity style={styles.insertBox}>
               <TextInput
                 style={styles.textInInsertBox}
@@ -119,6 +121,8 @@ const CreateAccountScreen = () => {
                 placeholderTextColor={Colors.placeholder}
               ></TextInput>
             </TouchableOpacity>
+
+            {/* Nhập last name */}
             <TouchableOpacity style={styles.insertBox}>
               <TextInput
                 style={styles.textInInsertBox}
@@ -130,6 +134,8 @@ const CreateAccountScreen = () => {
             {/* Layout thông tin account và button Next */}
             <View>
               <Text style={styles.smallTitle}>Account</Text>
+
+              {/* Nhập email */}
               <TouchableOpacity style={styles.insertBox}>
                 <TextInput
                   style={styles.textInInsertBox}
@@ -137,6 +143,8 @@ const CreateAccountScreen = () => {
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
               </TouchableOpacity>
+
+              {/* Nhập username */}
               <TouchableOpacity style={styles.insertBox}>
                 <TextInput
                   style={styles.textInInsertBox}
@@ -144,6 +152,8 @@ const CreateAccountScreen = () => {
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
               </TouchableOpacity>
+
+              {/* Nhập Password */}
               <TouchableOpacity style={styles.insertBox}>
                 <TextInput
                   style={styles.textInInsertBox}
@@ -151,13 +161,17 @@ const CreateAccountScreen = () => {
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.insertBox}>
+
+              {/* Nhập lại password (check xem có giống với phía trên) */}
+              <View style={styles.insertBox}>
                 <TextInput
                   style={styles.textInInsertBox}
                   placeholder="Confirm your password"
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
-              </TouchableOpacity>
+              </View>
+
+              {/* Button: next */}
               <TouchableOpacity style={styles.button}>
                 <Text style={styles.textInButton}>Next</Text>
               </TouchableOpacity>
@@ -180,7 +194,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     zIndex: 1000,
     elevation: 1000,
-    
   },
 
   arrowIcon: {
@@ -282,7 +295,15 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     marginTop: "auto",
     marginLeft: 15,
-    marginRight: "auto",
+    marginRight: 15,
+  },
+
+  frameToInsert: {
+    marginTop: 0,
+    marginBottom: 0,
+    height: 45,
+    borderRadius: 10,
+    marginHorizontal: 0,
   },
 });
 

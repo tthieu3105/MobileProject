@@ -18,6 +18,7 @@ import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
 import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 import UserAvatar from "@muhzi/react-native-user-avatar";
+import axios from "axios";
 
 const CalendarScreen = () => {
   // currentDate:  lưu trữ ngày hiện tại và được khởi tạo ban đầu bằng đối tượng Date mới
@@ -27,10 +28,9 @@ const CalendarScreen = () => {
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  //  xác định các ngày được chọn và hiện tại
-  //   daysOfWeek để hiển thị thứ của các ngày
-  // isToday và isSelected được sử dụng để xác định xem ngày đó có phải là ngày hiện tại
-  // hoặc được chọn không, từ đó định dạng style của các phần tử trong danh sách.
+  {/* xác định các ngày được chọn và hiện tại daysOfWeek để hiển thị thứ của các ngày
+  isToday và isSelected được sử dụng để xác định xem ngày đó có phải là ngày hiện tại
+  hoặc được chọn không, từ đó định dạng style của các phần tử trong danh sách.*/}
   const renderDay = ({ item }) => {
     const date = new Date(currentDate);
     const dayOfWeek = date.getDay();
@@ -43,7 +43,11 @@ const CalendarScreen = () => {
       // hiển thị thứ và ngày tương ứng
       <TouchableOpacity
         //   setSelectedDate để cập nhật giá trị
-        onPress={() => setSelectedDate(date)}
+        onPress={() => {
+          // Lấy danh sách công việc từ backend dựa trên ngày được chọn
+          fetchTasks(date).then((tasks) => setTasks(tasks));
+          setSelectedDate(date);
+        }}
         style={[
           styles.dayContainer,
           isToday && styles.today,
@@ -72,14 +76,29 @@ const CalendarScreen = () => {
     );
   };
 
+  const [task, setTasks] = useState([]);
+
+  const renderTask = ({ item }) => {
+    return (
+      <View style={styles.taskContainer}>
+        <View style={styles.taskFrame}>
+          <Text style={styles.taskName}>{item.name}</Text>
+          <Text style={styles.taskTime}>
+            {formatTime(item.startTime)} - {formatTime(item.endTime)}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       enabled
-      style={{ backgroundColor: "white" }}
+      style={{ backgroundColor: "white", flex:100 }}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <View style={{ backgroundColor: "white" }}>
+      <View>
         <View style={styles.row}>
           {/* Button: back to previous screen */}
           <TouchableOpacity>
@@ -96,7 +115,6 @@ const CalendarScreen = () => {
       <ScrollView>
         <View
           style={{
-            backgroundColor: "white",
             flex: 1,
           }}
         >
@@ -113,6 +131,16 @@ const CalendarScreen = () => {
             </View>
           </View>
           <View style={styles.line}></View>
+
+          {/* Layout */}
+
+          <View style={{ flex: 70, backgroundColor: "white" }}>
+            <FlatList
+              data={task}
+              renderItem={renderTask}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -303,6 +331,53 @@ const styles = StyleSheet.create({
   todayText: {
     color: "white",
   },
+
+  taskContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  taskFrame: {
+    flex: 1,
+    flexDirection: "column",
+    marginLeft: 10,
+    paddingVertical: 5,
+  },
+  taskName: {
+    fontWeight: "bold",
+  },
+  taskTime: {
+    marginTop: 5,
+  },
 });
+
+// function formatTime(date) {
+//   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+// }
+
+function fetchTasks(date) {
+  const formattedDate = formatDate(date);
+  const url = `https://example.com/tasks?date=${formattedDate}`;
+  return axios
+    .get(url)
+    .then((response) => response.data)
+    .catch((error) => console.error(error));
+}
+
+function formatDate(date) {
+  // Định dạng ngày thành chuỗi "yyyy-mm-dd"
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function formatTime(date) {
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
 
 export default CalendarScreen;

@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     marginTop: "auto",
     marginLeft: 15,
-    marginRight: "auto",
+    marginRight: 15,
   },
 
   direction: {
