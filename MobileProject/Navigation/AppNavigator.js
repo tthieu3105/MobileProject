@@ -8,6 +8,7 @@ import AddNoteScreen from "../Screens/AddNoteScreen.js";
 import CalendarScreen from "../Screens/CalendarScreen.js";
 import AccountFeature from "../Screens/AccountFeature.js";
 import EditProfile from "../Screens/EditProfile.js";
+import NoteInforScreen from "../Screens/NoteInfoScreen.js";
 
 const Stack = createStackNavigator();
 function StackNavigator() {
@@ -15,7 +16,7 @@ function StackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
-        component={AccountFeature}
+        component={NoteInforScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
