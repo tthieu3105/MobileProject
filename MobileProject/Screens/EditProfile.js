@@ -311,9 +311,10 @@ const styles = StyleSheet.create({
   },
 
   smallTitle: {
-    marginTop: 10,
+    marginTop: 25,
     marginLeft: 15,
     marginRight: "auto",
+    marginBottom: 5,
     color: "#363942",
     fontSize: 18,
     fontWeight: "bold",
@@ -363,7 +364,7 @@ const styles = StyleSheet.create({
     marginRight: 45,
   },
 
-  textInButton2:{
+  textInButton2: {
     fontSize: 16,
     color: "white",
     fontWeight: "bold",

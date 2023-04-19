@@ -6,112 +6,151 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Animated,
 } from "react-native";
 
-import React, { Component } from "react";
+import React, { Component, useEffect, useRef } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { ScrollView } from "react-native-gesture-handler";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import EvilIcon from "@expo/vector-icons/EvilIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-class EnterVerifyCode extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          backgroundColor: "white",
-          flex: 1,
-        }}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.container}
-          enabled
-          keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-        >
-          <ScrollView>
-            <View
-              style={{
-                backgroundColor: "white",
-                flex: 1,
-              }}
-            >
-              {/* Layout title, back button, picture */}
-              <View style={{ flex: 50, backgroundColor: "white" }}>
-                <View style={styles.row}>
-                  {/* Button: back to previous screen */}
-                  <TouchableOpacity>
-                    <AntDesign
-                      name="left"
-                      size={30}
-                      style={styles.arrowIcon}
-                    ></AntDesign>
-                  </TouchableOpacity>
-                  {/* Title */}
-                  <Text style={styles.title}>Verify your email</Text>
-                </View>
-                {/* Picture */}
-                <Image
-                  style={styles.image}
-                  source={require("../Pic/EnterCode.png")}
-                ></Image>
-              </View>
+const CONTAINER_HEIGHT = 80;
 
-              {/* Layout enter code, direction, button: next */}
-              <View style={{ flex: 50, backgroundColor: "white" }}>
-                {/* 4 box to enter code */}
-                <View style={styles.row}>
-                  <TouchableOpacity style={styles.codeBox1}>
-                    <TextInput
-                      style={styles.textInCodeBox}
-                      placeholder="0"
-                      placeholderTextColor={Colors.placeholder}
-                    ></TextInput>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.codeBox}>
-                    <TextInput
-                      style={styles.textInCodeBox}
-                      placeholder="0"
-                      placeholderTextColor={Colors.placeholder}
-                    ></TextInput>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.codeBox}>
-                    <TextInput
-                      style={styles.textInCodeBox}
-                      placeholder="0"
-                      placeholderTextColor={Colors.placeholder}
-                    ></TextInput>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.codeBox2}>
-                    <TextInput
-                      style={styles.textInCodeBox}
-                      placeholder="0"
-                      placeholderTextColor={Colors.placeholder}
-                    ></TextInput>
-                  </TouchableOpacity>
-                </View>
-                {/* Direction */}
-                <View>
-                  <Text style={styles.direction}>
-                    Please enter the 4 digit code
-                  </Text>
-                  <Text style={styles.ContinueDirection}>
-                    sent to your email
-                  </Text>
-                </View>
-                {/* button */}
-                <TouchableOpacity style={styles.button}>
-                  <Text style={styles.textInButton}>Verify</Text>
+const EnterVerifyCode = () => {
+  // Header Animation
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const offsetAnim = useRef(new Animated.Value(0)).current;
+  const clampedScroll = Animated.diffClamp(
+    Animated.add(
+      scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: "clamp",
+      }),
+      offsetAnim
+    ),
+    0,
+    CONTAINER_HEIGHT
+  );
+
+  var _clampedScrollValue = 0;
+  var _offsetValue = 0;
+  var _scrollValue = 0;
+  useEffect(() => {
+    scrollY.addListener(({ value }) => {
+      const diff = value - _scrollValue;
+      _scrollValue = value;
+      _clampedScrollValue = Math.min(
+        Math.max(_clampedScrollValue * diff, 0),
+        CONTAINER_HEIGHT
+      );
+    });
+    offsetAnim.addListener(({ value }) => {
+      _offsetValue = value;
+    });
+  }, []);
+
+  const headerTranslate = clampedScroll.interpolate({
+    inputRange: [0, CONTAINER_HEIGHT],
+    outputRange: [0, -CONTAINER_HEIGHT],
+    extrapolate: "clamp",
+  });
+  // End of header animation
+
+  return (
+    <Animated.View
+      style={{
+        backgroundColor: "white",
+        flex: 1,
+      }}
+    >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        enabled
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+      >
+        <Animated.ScrollView>
+          <View
+            style={{
+              backgroundColor: "white",
+              flex: 1,
+            }}
+          >
+            {/* Layout title, back button, picture */}
+            <View style={{ flex: 50, backgroundColor: "white" }}>
+              <View style={styles.row}>
+                {/* Button: back to previous screen */}
+                <TouchableOpacity>
+                  <AntDesign
+                    name="left"
+                    size={30}
+                    style={styles.arrowIcon}
+                  ></AntDesign>
+                </TouchableOpacity>
+                {/* Title */}
+                <Text style={styles.title}>Verify your email</Text>
+              </View>
+              {/* Picture */}
+              <Image
+                style={styles.image}
+                source={require("../Pic/EnterCode.png")}
+              ></Image>
+            </View>
+
+            {/* Layout enter code, direction, button: next */}
+            <View style={{ flex: 50, backgroundColor: "white" }}>
+              {/* 4 box to enter code */}
+              <View style={styles.row}>
+                <TouchableOpacity style={styles.codeBox1}>
+                  <TextInput
+                    style={styles.textInCodeBox}
+                    placeholder="0"
+                    placeholderTextColor={Colors.placeholder}
+                  ></TextInput>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.codeBox}>
+                  <TextInput
+                    style={styles.textInCodeBox}
+                    placeholder="0"
+                    placeholderTextColor={Colors.placeholder}
+                  ></TextInput>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.codeBox}>
+                  <TextInput
+                    style={styles.textInCodeBox}
+                    placeholder="0"
+                    placeholderTextColor={Colors.placeholder}
+                  ></TextInput>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.codeBox2}>
+                  <TextInput
+                    style={styles.textInCodeBox}
+                    placeholder="0"
+                    placeholderTextColor={Colors.placeholder}
+                  ></TextInput>
                 </TouchableOpacity>
               </View>
+              {/* Direction */}
+              <View>
+                <Text style={styles.direction}>
+                  Please enter the 4 digit code
+                </Text>
+                <Text style={styles.ContinueDirection}>sent to your email</Text>
+              </View>
+              {/* button */}
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.textInButton}>Verify</Text>
+              </TouchableOpacity>
             </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    );
-  }
-}
+          </View>
+        </Animated.ScrollView>
+      </KeyboardAvoidingView>
+    </Animated.View>
+  );
+};
 
 const styles = StyleSheet.create({
   arrowIcon: {
@@ -256,6 +295,7 @@ const styles = StyleSheet.create({
 
   textInCodeBox: {
     fontSize: 16,
+    width:"90%",
     // fontFamily: "Poppins",
     marginBottom: "auto",
     marginTop: "auto",

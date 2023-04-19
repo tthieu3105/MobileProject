@@ -121,10 +121,10 @@ const NoteInforScreen = () => {
           <View style={{ flex: 50, backgroundColor: "white", marginTop: 85 }}>
             {/* Title */}
             <Text style={styles.smallTitle}>Title</Text>
-            <TouchableOpacity style={styles.insertBox}>
+            <View style={styles.insertBox}>
               {/* Load title của note lên <text> */}
               <Text style={styles.textInInsertBox}></Text>
-            </TouchableOpacity>
+            </View>
 
             {/* Date */}
             <Text style={styles.smallTitle}>Date</Text>
@@ -138,10 +138,10 @@ const NoteInforScreen = () => {
           {/* Description */}
           <View style={{ flex: 60, backgroundColor: "white" }}>
             <Text style={styles.smallTitle}>Description</Text>
-            <TouchableOpacity style={styles.noteBox}>
+            <View style={styles.noteBox}>
               {/* load nội dung note lên text */}
               <Text style={styles.textInInsertBox}></Text>
-            </TouchableOpacity>
+            </View>
           </View>
 
           {/* Create note button */}

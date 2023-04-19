@@ -98,21 +98,21 @@ const LoginScreen = () => {
             </View>
 
             <View style={{ flex: 20, backgroundColor: "white" }}>
-              <TouchableOpacity style={styles.insertBox1}>
+              <View style={styles.insertBox1}>
                 <TextInput
                   style={styles.textInInsertBox}
                   placeholder="Username or Email"
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
-              </TouchableOpacity>
+              </View>
 
-              <TouchableOpacity style={styles.insertBox1}>
+              <View style={styles.insertBox1}>
                 <TextInput
                   style={styles.textInInsertBox}
                   placeholder="Password"
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
-              </TouchableOpacity>
+              </View>
 
               <TouchableOpacity>
                 <Text style={styles.underlineTextOnBackGround}>
@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
 
   textInInsertBox: {
     fontSize: 16,
+    width: "90%",
     // fontFamily: "Poppins",
     marginBottom: "auto",
     marginTop: "auto",
