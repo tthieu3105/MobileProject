@@ -15,7 +15,7 @@ function StackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
-        component={TaskInfoScreen}
+        component={CreateTask}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

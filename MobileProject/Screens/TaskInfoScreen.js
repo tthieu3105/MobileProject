@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  TextInputProps,
   StatusBar,
   Animated,
   ScrollView,
@@ -16,7 +15,6 @@ import React, { Component, useEffect, useRef } from "react";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import Header from "../Components.js/HeaderWithTextAndIcon";
 import { MaterialIcons } from "@expo/vector-icons";
-import TimeInput from "@tighten/react-native-time-input";
 import InputArea from "../Components.js/InputArea";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 const CONTAINER_HEIGHT = 80;
@@ -153,10 +151,12 @@ export default function TaskInfoScreen() {
                 {/* Input Text */}
                 <View style={styles.inputTextWithTime}>
                   <View style={styles.smallInputText}>
-                    <TextInput style={styles.textInInputText}></TextInput>
+                    {/* <TextInput style={styles.textInInputText}></TextInput> */}
+                    {/* Load dữ liệu lên */}
                   </View>
                   <View style={styles.smallInputText}>
-                    <TextInput style={styles.textInInputText}></TextInput>
+                    {/* <TextInput style={styles.textInInputText}></TextInput> */}
+                    {/* Load dữ liệu lên */}
                   </View>
                 </View>
               </View>
@@ -232,14 +232,7 @@ export default function TaskInfoScreen() {
               {/* Description */}
               <View style={{ flex: 60, backgroundColor: "white" }}>
                 <Text style={styles.smallTitle}>Description</Text>
-                <TouchableOpacity style={styles.noteBox}>
-                  <TextInput
-                    style={styles.textInNoteBox}
-                    multiline={true}
-                    placeholder="Your description here"
-                    placeholderTextColor={Colors.placeholder}
-                  />
-                </TouchableOpacity>
+                <View style={styles.noteBox}>{/* Load dữ liệu lên */}</View>
               </View>
             </View>
           </View>
@@ -289,10 +282,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     borderRadius: 10,
     marginHorizontal: 20,
-    marginTop: 10,
+    marginVertical: 10,
     alignItems: "center",
     padding: 10,
     flexDirection: "row",
+    shadowColor: "gray",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   smallInputText: {
     backgroundColor: "#F5F5F5",
@@ -303,6 +302,13 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     width: "40%",
+    height: 38,
+    shadowColor: "gray",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   textInInputText: {
     fontSize: 16,
@@ -360,10 +366,16 @@ const styles = StyleSheet.create({
   btnCreateTask: {
     backgroundColor: "#E7272D",
     borderRadius: 10,
-    marginHorizontal: 30,
+    marginHorizontal: 20,
     marginVertical: 20,
     alignItems: "center",
     padding: 15,
+    shadowColor: "gray",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   textInBtnCreateTask: {
     color: "#F8F6FF",
@@ -384,8 +396,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 340,
     borderRadius: 10,
-    shadowColor: "gray",
     marginHorizontal: 15,
+    shadowColor: "gray",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   textInNoteBox: {
     fontSize: 16,

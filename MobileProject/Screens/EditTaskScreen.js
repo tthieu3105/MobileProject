@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  TextInputProps,
   StatusBar,
   Animated,
   ScrollView,

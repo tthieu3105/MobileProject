@@ -48,6 +48,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     display: "flex",
     justifyContent: "space-between",
+    shadowColor: "gray",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   textInInputText: {
     fontSize: 16,

@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  TextInputProps,
 } from "react-native";
 import React, { Component } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";

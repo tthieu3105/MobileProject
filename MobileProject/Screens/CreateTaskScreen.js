@@ -16,7 +16,6 @@ import React, { Component, useEffect, useRef } from "react";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import Header from "../Components.js/HeaderWithTextAndAvatar";
 import { MaterialIcons } from "@expo/vector-icons";
-import TimeInput from "@tighten/react-native-time-input";
 import InputArea from "../Components.js/InputArea";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import UserAvatar from "@muhzi/react-native-user-avatar";

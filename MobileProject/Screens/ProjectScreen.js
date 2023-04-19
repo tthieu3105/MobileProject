@@ -11,13 +11,7 @@ import HomeSection from "../Components.js/HomeSection";
 import TaskCard from "../Components.js/TaskCardProgress";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRef } from "react";
-import {
-  setCustomView,
-  setCustomTextInput,
-  setCustomText,
-  setCustomImage,
-  setCustomTouchableOpacity,
-} from "react-native-global-props";
+
 import UserAvatar from "@muhzi/react-native-user-avatar";
 const Progress = ({ step, steps, height }) => {
   const [width, setWidth] = React.useState(0);
