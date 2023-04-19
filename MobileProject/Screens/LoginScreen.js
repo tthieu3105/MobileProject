@@ -155,6 +155,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 8,
     marginBottom: 20,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // fontStyle
   },
 
@@ -184,7 +189,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 30,
   },
 
@@ -194,7 +203,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 30,
     marginBottom: 150,
   },
@@ -205,7 +218,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 2,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 30,
     marginTop: 15,
   },

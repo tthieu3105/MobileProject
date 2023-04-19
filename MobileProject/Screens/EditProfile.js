@@ -279,6 +279,11 @@ const styles = StyleSheet.create({
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   downIcon: {
@@ -286,6 +291,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     marginRight: 15,
     marginLeft: "auto",
+    
   },
 
   row: {
@@ -306,7 +312,11 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // fontStyle
   },
 
@@ -318,9 +328,12 @@ const styles = StyleSheet.create({
     color: "#363942",
     fontSize: 18,
     fontWeight: "bold",
-    // marginVertical: 10,
-    shadowOpacity: 0.2,
-    // fontStyle
+    shadowColor:"gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   infoTitle: {
@@ -382,7 +395,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
     marginBottom: 30,
   },
@@ -394,7 +411,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginLeft: 15,
     marginRight: "auto",
     marginBottom: 50,
@@ -406,7 +427,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginLeft: "auto",
     marginRight: 15,
     marginBottom: 50,
@@ -418,7 +443,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 0,
     marginBottom: 10,
   },
@@ -432,6 +461,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
   },
 

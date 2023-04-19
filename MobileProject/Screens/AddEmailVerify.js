@@ -146,6 +146,11 @@ const styles = StyleSheet.create({
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   row: {
@@ -168,7 +173,11 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // fontStyle
   },
 
@@ -180,16 +189,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     marginTop: 30,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // fontStyle
-  },
-
-  normalTextOnBackGround: {
-    marginLeft: "auto",
-    marginRight: 30,
-    color: "black",
-    fontSize: 13,
-    textDecorationLine: "underline",
   },
 
   textInButton: {
@@ -210,7 +215,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
     marginBottom: 180,
   },
@@ -221,7 +230,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 30,
   },
 
@@ -234,6 +247,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
   },
 

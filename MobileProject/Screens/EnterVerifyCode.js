@@ -156,6 +156,11 @@ const styles = StyleSheet.create({
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   row: {
@@ -178,7 +183,11 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // fontStyle
   },
 
@@ -220,31 +229,13 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
     marginBottom: 30,
-  },
-
-  buttonCreateAccount: {
-    backgroundColor: "#81A3ED",
-    marginVertical: 15,
-    height: 50,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 10,
-    marginHorizontal: 30,
-  },
-
-  insertBox: {
-    backgroundColor: "#F5F5F5",
-    // marginVertical: 10,
-    marginTop: 5,
-    marginBottom: 10,
-    height: 45,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 0.5,
-    marginHorizontal: 15,
   },
 
   textInInsertBox: {
@@ -266,6 +257,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   codeBox2: {
@@ -279,6 +274,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   codeBox: {
@@ -290,6 +289,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginLeft: 40,
   },
 
