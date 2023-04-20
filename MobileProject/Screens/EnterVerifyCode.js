@@ -9,7 +9,7 @@ import {
   Animated,
 } from "react-native";
 
-import React, { Component, useEffect, useRef } from "react";
+import React, { Component, useEffect, useRef, useState } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { ScrollView } from "react-native-gesture-handler";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -59,6 +59,17 @@ const EnterVerifyCode = () => {
   });
   // End of header animation
 
+  //DIGIT CODE
+  const pin1Ref = useRef(null);
+  const pin2Ref = useRef(null);
+  const pin3Ref = useRef(null);
+  const pin4Ref = useRef(null);
+
+  const [pin1, setPin1] = useState("");
+  const [pin2, setPin2] = useState("");
+  const [pin3, setPin3] = useState("");
+  const [pin4, setPin4] = useState("");
+
   return (
     <Animated.View
       style={{
@@ -104,34 +115,63 @@ const EnterVerifyCode = () => {
             <View style={{ flex: 50, backgroundColor: "white" }}>
               {/* 4 box to enter code */}
               <View style={styles.row}>
-                <TouchableOpacity style={styles.codeBox1}>
+                <View style={styles.codeBox1}>
                   <TextInput
+                    ref={pin1Ref}
+                    keyboardType={"number-pad"}
+                    maxLength={1}
                     style={styles.textInCodeBox}
                     placeholder="0"
-                    placeholderTextColor={Colors.placeholder}
+                    onChange={(pin1) => {
+                      setPin1(pin1);
+                      if (pin1 != "") {
+                        pin2Ref.current.focus();
+                      }
+                    }}
                   ></TextInput>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.codeBox}>
+                </View>
+                <View style={styles.codeBox}>
                   <TextInput
+                    ref={pin2Ref}
+                    keyboardType={"number-pad"}
+                    maxLength={1}
                     style={styles.textInCodeBox}
                     placeholder="0"
-                    placeholderTextColor={Colors.placeholder}
+                    onChange={(pin2) => {
+                      setPin2(pin2);
+                      if (pin2 != "") {
+                        pin3Ref.current.focus();
+                      }
+                    }}
                   ></TextInput>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.codeBox}>
+                </View>
+                <View style={styles.codeBox}>
                   <TextInput
+                    ref={pin3Ref}
+                    keyboardType={"number-pad"}
+                    maxLength={1}
                     style={styles.textInCodeBox}
                     placeholder="0"
-                    placeholderTextColor={Colors.placeholder}
+                    onChange={(pin3) => {
+                      setPin3(pin3);
+                      if (pin3 != "") {
+                        pin4Ref.current.focus();
+                      }
+                    }}
                   ></TextInput>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.codeBox2}>
+                </View>
+                <View style={styles.codeBox2}>
                   <TextInput
+                    ref={pin4Ref}
+                    keyboardType={"number-pad"}
+                    maxLength={1}
                     style={styles.textInCodeBox}
                     placeholder="0"
-                    placeholderTextColor={Colors.placeholder}
+                    onChange={(pin4) => {
+                      setPin4(pin4);
+                    }}
                   ></TextInput>
-                </TouchableOpacity>
+                </View>
               </View>
               {/* Direction */}
               <View>
@@ -236,6 +276,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 50,
     height: 45,
+    width: 40,
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
@@ -253,6 +294,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginRight: 50,
     height: 45,
+    width: 40,
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
@@ -268,6 +310,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 5,
     height: 45,
+    width: 40,
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
@@ -280,7 +323,8 @@ const styles = StyleSheet.create({
 
   textInCodeBox: {
     fontSize: 16,
-    width:"90%",
+    width: 40,
+    height: 45,
     // fontFamily: "Poppins",
     marginBottom: "auto",
     marginTop: "auto",

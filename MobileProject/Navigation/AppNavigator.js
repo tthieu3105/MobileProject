@@ -16,7 +16,7 @@ function StackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
-        component={CalendarScreen}
+        component={EnterVerifyCode}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
