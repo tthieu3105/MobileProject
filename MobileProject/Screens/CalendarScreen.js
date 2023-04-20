@@ -1,24 +1,19 @@
 import {
   View,
-  Image,
   StyleSheet,
   Text,
   FlatList,
   TouchableOpacity,
-  TextInput,
   KeyboardAvoidingView,
+  Animated,
 } from "react-native";
 
-import Constants from "expo-constants";
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import { useState, useEffect } from "react";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { ScrollView } from "react-native-gesture-handler";
-import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
-import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
-import UserAvatar from "@muhzi/react-native-user-avatar";
 import axios from "axios";
+
+const CONTAINER_HEIGHT = 80;
 
 const CalendarScreen = () => {
   // currentDate:  lưu trữ ngày hiện tại và được khởi tạo ban đầu bằng đối tượng Date mới
@@ -28,12 +23,15 @@ const CalendarScreen = () => {
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  {/* xác định các ngày được chọn và hiện tại daysOfWeek để hiển thị thứ của các ngày
+  {
+    /* xác định các ngày được chọn và hiện tại daysOfWeek để hiển thị thứ của các ngày
   isToday và isSelected được sử dụng để xác định xem ngày đó có phải là ngày hiện tại
-  hoặc được chọn không, từ đó định dạng style của các phần tử trong danh sách.*/}
+  hoặc được chọn không, từ đó định dạng style của các phần tử trong danh sách.*/
+  }
   const renderDay = ({ item }) => {
     const date = new Date(currentDate);
     const dayOfWeek = date.getDay();
+    
     const diff = item - dayOfWeek;
     date.setDate(currentDate.getDate() + diff);
     const isToday = currentDate.getDate() === date.getDate();
@@ -91,14 +89,59 @@ const CalendarScreen = () => {
     );
   };
 
+  // Header Animation
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const offsetAnim = useRef(new Animated.Value(0)).current;
+  const clampedScroll = Animated.diffClamp(
+    Animated.add(
+      scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: "clamp",
+      }),
+      offsetAnim
+    ),
+    0,
+    CONTAINER_HEIGHT
+  );
+
+  var _clampedScrollValue = 0;
+  var _offsetValue = 0;
+  var _scrollValue = 0;
+  useEffect(() => {
+    scrollY.addListener(({ value }) => {
+      const diff = value - _scrollValue;
+      _scrollValue = value;
+      _clampedScrollValue = Math.min(
+        Math.max(_clampedScrollValue * diff, 0),
+        CONTAINER_HEIGHT
+      );
+    });
+    offsetAnim.addListener(({ value }) => {
+      _offsetValue = value;
+    });
+  }, []);
+
+  const headerTranslate = clampedScroll.interpolate({
+    inputRange: [0, CONTAINER_HEIGHT],
+    outputRange: [0, -CONTAINER_HEIGHT],
+    extrapolate: "clamp",
+  });
+  // End of header animation
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       enabled
-      style={{ backgroundColor: "white", flex:100 }}
+      style={{ backgroundColor: "white", flex: 100 }}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <View>
+      <Animated.View
+        style={[
+          styles.header,
+          { transform: [{ translateY: headerTranslate }] },
+        ]}
+      >
         <View style={styles.row}>
           {/* Button: back to previous screen */}
           <TouchableOpacity>
@@ -111,8 +154,13 @@ const CalendarScreen = () => {
           {/* Title */}
           <Text style={styles.title}>Schedule</Text>
         </View>
-      </View>
-      <ScrollView>
+      </Animated.View>
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
+      >
         <View
           style={{
             flex: 1,
@@ -132,35 +180,47 @@ const CalendarScreen = () => {
           </View>
           <View style={styles.line}></View>
 
-          {/* Layout */}
+          {/* Layout hiển thị các task trong ngày đc chọn trên calendar */}
 
           <View style={{ flex: 70, backgroundColor: "white" }}>
             <FlatList
               data={task}
               renderItem={renderTask}
               keyExtractor={(item) => item.id}
-            />
+            >
+              <View style={styles.insertBox}>
+                
+              </View>
+            </FlatList>
           </View>
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  header: {
+    position: "absolute",
+    width: "100%",
+    height: CONTAINER_HEIGHT,
+    left: 0,
+    right: 0,
+    top: 0,
+    backgroundColor: "white",
+    zIndex: 1000,
+    elevation: 1000,
+  },
+
   arrowIcon: {
-    marginTop: 45,
-    marginLeft: 10,
-    marginBottom: 30,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
+
   },
 
   row: {
     flexDirection: "row",
+    alignItems: "center",
+    marginTop: 45,
+    marginHorizontal:20,
   },
 
   image: {
@@ -173,17 +233,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginLeft: 90,
-    marginRight: "auto",
+    marginLeft: 80,
     color: "#363942",
     fontSize: 27,
     fontWeight: "bold",
-    marginTop: 45,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
+    
     // fontStyle
   },
 
@@ -292,7 +346,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 100,
     marginBottom: 20,
   },
   dayContainer: {
@@ -310,12 +364,14 @@ const styles = StyleSheet.create({
     // fontWeight: "bold",
     color: "#333",
   },
+
   dateText: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
     marginTop: 5,
   },
+
   today: {
     color: "white",
     backgroundColor: "#4B7BE5",
@@ -329,19 +385,17 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: "#777D84",
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
   },
+
   selected: {
     borderWidth: 2,
     borderColor: "#4B7BE5",
   },
+
   selectedText: {
     color: "black",
   },
+
   todayText: {
     color: "white",
   },
@@ -353,15 +407,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
+
   taskFrame: {
     flex: 1,
     flexDirection: "column",
     marginLeft: 10,
     paddingVertical: 5,
   },
+
   taskName: {
     fontWeight: "bold",
   },
+
   taskTime: {
     marginTop: 5,
   },

@@ -224,21 +224,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginTop: 55,
-    shadowColor: "gray",
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    // fontStyle
-  },
-
-  normalTextOnBackGround: {
-    marginLeft: "auto",
-    marginRight: 30,
-    color: "black",
-    fontSize: 13,
-    textDecorationLine: "underline",
+        // fontStyle
   },
 
   textInButton: {
@@ -266,16 +252,6 @@ const styles = StyleSheet.create({
     },
     marginHorizontal: 15,
     marginBottom: 80,
-  },
-
-  buttonCreateAccount: {
-    backgroundColor: "#81A3ED",
-    marginVertical: 15,
-    height: 50,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 10,
-    marginHorizontal: 30,
   },
 
   noteBox: {

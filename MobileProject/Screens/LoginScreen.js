@@ -21,7 +21,6 @@ import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 import UserAvatar from "@muhzi/react-native-user-avatar";
 
 const CONTAINER_HEIGHT = 80;
-// class WelcomeScreen extends Component { render() { [...] } }
 
 const LoginScreen = () => {
   // Header Animation
@@ -67,77 +66,82 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ backgroundColor: "white", flex: 100 }}
+      style={{ backgroundColor: "white" }}
       enabled
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <Animated.View
-        style={[
-          styles.header,
-          { transform: [{ translateY: headerTranslate }] },
-        ]}
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
       >
-        <Animated.ScrollView
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true }
-          )}
+        <View
+          style={{
+            flex: 100,
+            backgroundColor: "white",
+          }}
         >
-          <View
-            style={{
-              flex: 100,
-              backgroundColor: "white",
-            }}
-          >
-            <View style={{ flex: 50, backgroundColor: "white" }}>
-              <Image
-                style={styles.image}
-                source={require("../Pic/welcomePic.png")}
-              ></Image>
-              <Text style={styles.title}> MANAGE YOUR TIME </Text>
-            </View>
-
-            <View style={{ flex: 20, backgroundColor: "white" }}>
-              <View style={styles.insertBox1}>
-                <TextInput
-                  style={styles.textInInsertBox}
-                  placeholder="Username or Email"
-                  placeholderTextColor={Colors.placeholder}
-                ></TextInput>
-              </View>
-
-              <View style={styles.insertBox1}>
-                <TextInput
-                  style={styles.textInInsertBox}
-                  placeholder="Password"
-                  placeholderTextColor={Colors.placeholder}
-                ></TextInput>
-              </View>
-
-              <TouchableOpacity>
-                <Text style={styles.underlineTextOnBackGround}>
-                  Forgot your password?
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={{ backgroundColor: "white" }}>
-              <TouchableOpacity style={styles.buttonLogin}>
-                <Text style={styles.textInButton}>Login</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.buttonCreateAccount}>
-                <Text style={styles.textInButton}>Create account</Text>
-              </TouchableOpacity>
-            </View>
+          <View style={{ flex: 50, backgroundColor: "white" }}>
+            <Image
+              style={styles.image}
+              source={require("../Pic/welcomePic.png")}
+            ></Image>
+            <Text style={styles.title}> MANAGE YOUR TIME </Text>
           </View>
-        </Animated.ScrollView>
-      </Animated.View>
+
+          <View style={{ flex: 20, backgroundColor: "white" }}>
+            <View style={styles.insertBox1}>
+              <TextInput
+                style={styles.textInInsertBox}
+                placeholder="Username or Email"
+                placeholderTextColor={Colors.placeholder}
+              ></TextInput>
+            </View>
+
+            <View style={styles.insertBox1}>
+              <TextInput
+                style={styles.textInInsertBox}
+                placeholder="Password"
+                placeholderTextColor={Colors.placeholder}
+              ></TextInput>
+            </View>
+
+            <TouchableOpacity>
+              <Text style={styles.underlineTextOnBackGround}>
+                Forgot your password?
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ backgroundColor: "white" }}>
+            <TouchableOpacity style={styles.buttonLogin}>
+              <Text style={styles.textInButton}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonCreateAccount}>
+              <Text style={styles.textInButton}>Create account</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Animated.ScrollView>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  header: {
+    position: "absolute",
+    width: "100%",
+    height: CONTAINER_HEIGHT,
+    left: 0,
+    right: 0,
+    top: 0,
+    backgroundColor: "white",
+    zIndex: 1000,
+    elevation: 1000,
+  },
+
   image: {
     height: 225,
     width: 225,
@@ -155,11 +159,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 8,
     marginBottom: 20,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
     // fontStyle
   },
 

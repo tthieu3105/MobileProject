@@ -153,14 +153,21 @@ const EnterVerifyCode = () => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    position: "absolute",
+    width: "100%",
+    height: CONTAINER_HEIGHT,
+    left: 0,
+    right: 0,
+    top: 0,
+    backgroundColor: "white",
+    zIndex: 1000,
+    elevation: 1000,
+  },
+
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
   },
 
   row: {
@@ -183,32 +190,7 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
     // fontStyle
-  },
-
-  smallTitle: {
-    marginLeft: 15,
-    marginRight: "auto",
-    color: "#363942",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-    marginTop: 30,
-    shadowOpacity: 0.2,
-    // fontStyle
-  },
-
-  normalTextOnBackGround: {
-    marginLeft: "auto",
-    marginRight: 30,
-    color: "black",
-    fontSize: 13,
-    textDecorationLine: "underline",
   },
 
   textInButton: {
@@ -312,6 +294,11 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     fontWeight: "bold",
     marginTop: 25,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   ContinueDirection: {
     fontSize: 16,
@@ -320,6 +307,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 0,
     marginBottom: 20,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 });
 

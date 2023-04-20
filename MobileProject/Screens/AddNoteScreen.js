@@ -205,11 +205,6 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
     // fontStyle
   },
 
@@ -220,7 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginVertical: 10,
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowOffset: {
       width: 2,
       height: 2,

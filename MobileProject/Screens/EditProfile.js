@@ -279,11 +279,6 @@ const styles = StyleSheet.create({
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
   },
 
   downIcon: {
@@ -312,11 +307,6 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
     // fontStyle
   },
 
@@ -329,7 +319,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     shadowColor:"gray",
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -343,6 +333,11 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     color: "#363942",
     fontSize: 14,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // shadowOpacity: 0.2,
     // fontStyle
   },

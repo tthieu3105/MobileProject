@@ -146,11 +146,6 @@ const styles = StyleSheet.create({
   arrowIcon: {
     marginTop: 45,
     marginLeft: 10,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
   },
 
   row: {
@@ -173,11 +168,6 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginTop: 45,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
     // fontStyle
   },
 
@@ -189,7 +179,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     marginTop: 30,
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -269,7 +259,13 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     fontWeight: "bold",
     marginTop: 25,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
+
   ContinueDirection: {
     fontSize: 16,
     marginLeft: "auto",
@@ -277,6 +273,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 0,
     marginBottom: 20,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 });
 
