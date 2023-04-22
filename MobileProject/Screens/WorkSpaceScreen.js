@@ -147,6 +147,7 @@ const WorkSpaceScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
+            
           </View>
 
           <View style={{ backgroundColor: "white", flex: 80 }}>

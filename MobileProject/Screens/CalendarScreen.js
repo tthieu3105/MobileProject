@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 5,
     marginLeft: 15,
-    marginRight: 130
+    marginRight: 130,
   },
   timeInTaskBox: {
     fontSize: 13,
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 15,
     marginRight: "auto",
-    color:"gray",
+    color: "gray",
   },
 
   textInNoteBox: {
@@ -393,6 +393,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 0,
     marginBottom: 20,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
 
   taskFrame: {
