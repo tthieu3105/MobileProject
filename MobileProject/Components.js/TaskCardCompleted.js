@@ -65,6 +65,12 @@ const styles = StyleSheet.create({
     marginVertical: 7,
     alignItems: "flex-start",
     padding: 10,
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   taskCardTitle: {
     color: "#363942",

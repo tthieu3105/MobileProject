@@ -19,6 +19,7 @@ export default class InputArea extends Component {
             style={styles.textInInputText}
             placeholder={this.props.placeHolder}
             placeholderTextColor={Colors.placeholder}
+            editable={this.props.editableState}
           ></TextInput>
           <TouchableOpacity>
             {/* Icon */}
@@ -34,9 +35,15 @@ const styles = StyleSheet.create({
   title: {
     color: "#363942",
     fontSize: 12,
-    fontWeight: "500",
+    fontWeight: "bold",
     marginHorizontal: 20,
     marginTop: 20,
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   inputText: {
     backgroundColor: "#F5F5F5",
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-between",
     shadowColor: "gray",
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
     shadowOffset: {
       width: 2,
       height: 2,

@@ -62,6 +62,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: "flex-start",
     padding: 10,
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   firstRowNoteCard: {},
   lineInNoteCard: {

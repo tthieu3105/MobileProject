@@ -15,7 +15,7 @@ import React, { Component, useEffect, useRef } from "react";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import Header from "../Components.js/HeaderWithTextAndIcon";
 import { MaterialIcons } from "@expo/vector-icons";
-import InputArea from "../Components.js/InputArea";
+import InputArea from "../Components.js/InputAreaForTask";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 const CONTAINER_HEIGHT = 80;
 
@@ -68,6 +68,7 @@ export default function TaskInfoScreen() {
     icon1: "arrow-drop-down-circle",
     icon3: "calendar-today",
     hintText: "Enter Username or Email",
+    disable: "false",
   };
 
   return (
@@ -114,6 +115,7 @@ export default function TaskInfoScreen() {
             <InputArea
               name={this.inputText.name1}
               icon={this.inputText.icon1}
+              editableState={this.inputText.disable}
             ></InputArea>
 
             {/* <InputText nameInputText={this.inputText.name1}></InputText> */}
@@ -121,7 +123,10 @@ export default function TaskInfoScreen() {
 
             {/* Title name */}
             {/* TextInput */}
-            <InputArea name={this.inputText.name2}></InputArea>
+            <InputArea
+              name={this.inputText.name2}
+              editableState={this.inputText.disable}
+            ></InputArea>
 
             {/* End of TextInput */}
 
@@ -130,6 +135,7 @@ export default function TaskInfoScreen() {
             <InputArea
               name={this.inputText.name3}
               icon={this.inputText.icon3}
+              editableState={this.inputText.disable}
             ></InputArea>
 
             {/* End of TextInput */}
@@ -151,11 +157,17 @@ export default function TaskInfoScreen() {
                 {/* Input Text */}
                 <View style={styles.inputTextWithTime}>
                   <View style={styles.smallInputText}>
-                    {/* <TextInput style={styles.textInInputText}></TextInput> */}
+                    <TextInput
+                      style={styles.textInInputText}
+                      editable={false}
+                    ></TextInput>
                     {/* Load dữ liệu lên */}
                   </View>
                   <View style={styles.smallInputText}>
-                    {/* <TextInput style={styles.textInInputText}></TextInput> */}
+                    <TextInput
+                      style={styles.textInInputText}
+                      editable={false}
+                    ></TextInput>
                     {/* Load dữ liệu lên */}
                   </View>
                 </View>
@@ -172,9 +184,10 @@ export default function TaskInfoScreen() {
                         name="access-alarm"
                         size={24}
                         color="black"
+                        style={{ marginRight: 3 }}
                       />
                     </TouchableOpacity>
-                    <Text style={styles.textInEnableRow}>Remind</Text>
+                    <Text style={styles.titleInEnableRow}>Remind</Text>
                   </View>
                   <View style={styles.childRowEnableMiddle}>
                     <Text style={styles.textInEnableRow}>1 days before</Text>
@@ -195,8 +208,13 @@ export default function TaskInfoScreen() {
                 {/* Due date */}
                 <View style={styles.rowEnable}>
                   <View style={styles.childRowEnable}>
-                    <Feather name="calendar" size={24} color="#363942" />
-                    <Text style={styles.textInEnableRow}>End date</Text>
+                    <Feather
+                      name="calendar"
+                      size={24}
+                      color="#363942"
+                      style={{ marginRight: 3 }}
+                    />
+                    <Text style={styles.titleInEnableRow}>End date</Text>
                   </View>
                   <View style={styles.childRowEnable}>
                     <Text style={styles.textInEnableRow}>Enable</Text>
@@ -210,8 +228,9 @@ export default function TaskInfoScreen() {
                       name="people-outline"
                       size={24}
                       color="black"
+                      style={{ marginRight: 3 }}
                     />
-                    <Text style={styles.textInEnableRow}>Assign to</Text>
+                    <Text style={styles.titleInEnableRow}>Assign to</Text>
                   </View>
                   <View style={styles.childRowEnable}>
                     <Text style={styles.textInEnableRow}>Enable</Text>
@@ -222,8 +241,8 @@ export default function TaskInfoScreen() {
                   <View style={styles.inputText}>
                     <TextInput
                       style={styles.textInInputText}
-                      placeholder="Enter Username or Email"
                       placeholderTextColor={Colors.placeholder}
+                      editable={false}
                     ></TextInput>
                   </View>
                 </View>
@@ -232,7 +251,15 @@ export default function TaskInfoScreen() {
               {/* Description */}
               <View style={{ flex: 60, backgroundColor: "white" }}>
                 <Text style={styles.smallTitle}>Description</Text>
-                <View style={styles.noteBox}>{/* Load dữ liệu lên */}</View>
+                <View style={styles.noteBox}>
+                  {/* Load dữ liệu lên */}
+                  <TextInput
+                    style={styles.textInNoteBox}
+                    multiline={true}
+                    placeholderTextColor={Colors.placeholder}
+                    editable={false}
+                  />
+                </View>
               </View>
             </View>
           </View>
@@ -287,7 +314,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     shadowColor: "gray",
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -304,7 +331,7 @@ const styles = StyleSheet.create({
     width: "40%",
     height: 38,
     shadowColor: "gray",
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -321,10 +348,16 @@ const styles = StyleSheet.create({
   timeTitle: {
     color: "#363942",
     fontSize: 12,
-    fontWeight: "500",
+    fontWeight: "bold",
     marginHorizontal: 20,
     marginTop: 20,
     width: "40%",
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   itemsEnable: {
     display: "flex",
@@ -353,6 +386,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
   },
+  titleInEnableRow: {
+    color: "#363942",
+    fontSize: 12,
+    fontWeight: "bold",
+    shadowColor: "gray",
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+  },
   createTask: {
     position: "relative",
     width: "100%",
@@ -371,7 +415,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     shadowColor: "gray",
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -385,10 +429,16 @@ const styles = StyleSheet.create({
   smallTitle: {
     color: "#363942",
     fontSize: 12,
-    fontWeight: "500",
+    fontWeight: "bold",
     marginHorizontal: 20,
     marginTop: 20,
     marginVertical: 10,
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   noteBox: {
     backgroundColor: "#F5F5F5",
@@ -398,7 +448,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 15,
     shadowColor: "gray",
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -411,5 +461,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: "auto",
     height: 340,
+    width: "90%",
   },
 });
