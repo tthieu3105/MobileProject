@@ -9,6 +9,7 @@ import CalendarScreen from "../Screens/CalendarScreen.js";
 import AccountFeature from "../Screens/AccountFeature.js";
 import EditProfile from "../Screens/EditProfile.js";
 import NoteInforScreen from "../Screens/NoteInfoScreen.js";
+import WorkSpaceScreen from "../Screens/WorkSpaceScreen.js";
 
 const Stack = createStackNavigator();
 function StackNavigator() {
@@ -16,7 +17,7 @@ function StackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
-        component={EnterVerifyCode}
+        component={WorkSpaceScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
@@ -30,4 +31,5 @@ const AppNavigator = () => {
     </NavigationContainer>
   );
 };
+
 export default AppNavigator;

@@ -31,12 +31,14 @@ const CalendarScreen = () => {
   const renderDay = ({ item }) => {
     const date = new Date(currentDate);
     const dayOfWeek = date.getDay();
-    
+
     const diff = item - dayOfWeek;
     date.setDate(currentDate.getDate() + diff);
     const isToday = currentDate.getDate() === date.getDate();
     const isSelected =
       selectedDate && selectedDate.getDate() === date.getDate();
+
+    const data = [{ key: "1", value: "he thong thong tin" }];
     return (
       // hiển thị thứ và ngày tương ứng
       <TouchableOpacity
@@ -74,6 +76,7 @@ const CalendarScreen = () => {
     );
   };
 
+  //Task
   const [task, setTasks] = useState([]);
 
   const renderTask = ({ item }) => {
@@ -155,6 +158,7 @@ const CalendarScreen = () => {
           <Text style={styles.title}>Schedule</Text>
         </View>
       </Animated.View>
+
       <Animated.ScrollView
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -181,17 +185,21 @@ const CalendarScreen = () => {
           <View style={styles.line}></View>
 
           {/* Layout hiển thị các task trong ngày đc chọn trên calendar */}
-
           <View style={{ flex: 70, backgroundColor: "white" }}>
-            <FlatList
+            {/* <FlatList
               data={task}
               renderItem={renderTask}
               keyExtractor={(item) => item.id}
-            >
-              <View style={styles.insertBox}>
-                
+              showsVerticalScrollIndicator={true}
+            ></FlatList> */}
+
+            <View style={styles.container1}>
+              <Text style={styles.textInInsertBox}>8:00AM</Text>
+              <View style={styles.taskBox}>
+                <Text style={styles.textInTaskBox}>Continue Project</Text>
+                <Text style={styles.timeInTaskBox}>8:00AM - 10:00AM</Text>
               </View>
-            </FlatList>
+            </View>
           </View>
         </View>
       </Animated.ScrollView>
@@ -212,15 +220,13 @@ const styles = StyleSheet.create({
     elevation: 1000,
   },
 
-  arrowIcon: {
-
-  },
+  arrowIcon: {},
 
   row: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 45,
-    marginHorizontal:20,
+    marginHorizontal: 20,
   },
 
   image: {
@@ -237,7 +243,7 @@ const styles = StyleSheet.create({
     color: "#363942",
     fontSize: 27,
     fontWeight: "bold",
-    
+
     // fontStyle
   },
 
@@ -317,13 +323,44 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 
+  taskBox: {
+    backgroundColor: "#F5F5F5",
+    // marginVertical: 10,
+    marginTop: 5,
+    marginBottom: 10,
+    height: 55,
+    borderRadius: 10,
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+
   textInInsertBox: {
     fontSize: 16,
     // fontFamily: "Poppins",
-    marginBottom: "auto",
-    marginTop: "auto",
+    marginBottom: 20,
+    marginTop: 10,
+    marginLeft: 15,
+    // marginRight: "auto",
+  },
+
+  textInTaskBox: {
+    fontSize: 16,
+    // fontFamily: "Poppins",
+    marginBottom: 0,
+    marginTop: 5,
+    marginLeft: 15,
+    marginRight: 130
+  },
+  timeInTaskBox: {
+    fontSize: 13,
+    // fontFamily: "Poppins",
+    marginBottom: 5,
+    marginTop: 5,
     marginLeft: 15,
     marginRight: "auto",
+    color:"gray",
   },
 
   textInNoteBox: {
@@ -349,6 +386,25 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginBottom: 20,
   },
+
+  container1: {
+    flexDirection: "row",
+    // justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 0,
+    marginBottom: 20,
+  },
+
+  taskFrame: {
+    marginLeft: 30,
+    marginRight: 15,
+  },
+
+  taskName: {
+    color: "#333",
+    fontSize: 15,
+  },
+
   dayContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -421,6 +477,7 @@ const styles = StyleSheet.create({
 
   taskTime: {
     marginTop: 5,
+    fontSize: 10,
   },
 });
 

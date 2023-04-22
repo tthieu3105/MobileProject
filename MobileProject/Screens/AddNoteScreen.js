@@ -1,6 +1,5 @@
 import {
   View,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,13 +8,9 @@ import {
   Animated,
 } from "react-native";
 
-import Constants from "expo-constants";
 import React, { Component, useRef } from "react";
 import { useState, useEffect } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { ScrollView } from "react-native-gesture-handler";
-import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
-import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 import UserAvatar from "@muhzi/react-native-user-avatar";
 
@@ -189,25 +184,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
-  image: {
-    height: 225,
-    width: 225,
-    alignItems: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 20,
-  },
-
-  title: {
-    marginLeft: 20,
-    marginRight: "auto",
-    color: "#363942",
-    fontSize: 27,
-    fontWeight: "bold",
-    marginTop: 45,
-    // fontStyle
-  },
-
   smallTitle: {
     marginLeft: 15,
     marginRight: "auto",
@@ -221,14 +197,6 @@ const styles = StyleSheet.create({
       height: 2,
     },
     // fontStyle
-  },
-
-  normalTextOnBackGround: {
-    marginLeft: "auto",
-    marginRight: 30,
-    color: "black",
-    fontSize: 13,
-    textDecorationLine: "underline",
   },
 
   textInButton: {
@@ -307,20 +275,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     height: 340,
-  },
-
-  separator: {
-    marginTop: 40,
-    marginRight: 25,
-    marginLeft: "auto",
-  },
-
-  container: {
-    // alignItems: "center",
-    // justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "white",
-    // padding: 8,
   },
 });
 
