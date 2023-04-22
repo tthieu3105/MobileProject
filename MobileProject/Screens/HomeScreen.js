@@ -237,6 +237,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     flexDirection: "row",
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
   textInSearchBox: {
     fontSize: 16,
