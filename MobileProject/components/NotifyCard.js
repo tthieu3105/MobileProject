@@ -2,6 +2,7 @@ import { Text, StyleSheet, View } from "react-native";
 import React, { Component } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+
 export default class NotifyCard extends Component {
   render() {
     return (

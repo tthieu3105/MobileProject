@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { Component, useEffect, useRef } from "react";
 import { TouchableOpacity } from "react-native";
-import NotifyCard from "../Components.js/NotifyCard";
+import NotifyCard from "../components/NotifyCard";
 import { ScrollView } from "react-native";
 import { StatusBar } from "react-native";
 const CONTAINER_HEIGHT = 80;

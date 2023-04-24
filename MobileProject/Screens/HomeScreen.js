@@ -19,11 +19,11 @@ import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
 import { Dimensions } from "react-native";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
-import HomeSection from "../Components.js/HomeSection";
-import TaskCardOP from "../Components.js/TaskCardProgress";
-import TaskCardCP from "../Components.js/TaskCardCompleted";
-import TaskCardOD from "../Components.js/TaskCardOverdue";
-import Header from "../Components.js/HeaderWithTextAndAvatar";
+import HomeSection from "../components/HomeSection";
+import TaskCardOP from "../components/TaskCardProgress";
+import TaskCardCP from "../components/TaskCardCompleted";
+import TaskCardOD from "../components/TaskCardOverdue";
+import Header from "../components/HeaderWithTextAndAvatar";
 const CONTAINER_HEIGHT = 80;
 export default function HomeScreen() {
   // Header Animation

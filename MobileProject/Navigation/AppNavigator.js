@@ -1,8 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useNavigation } from "@react-navigation/native";
+import { Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import LoginScreen from "../Screens/LoginScreen.js";
 import CreateAccScreen from "../Screens/CreateAccScreen.js";
@@ -22,15 +26,16 @@ import TaskInfoScreen from "../Screens/TaskInfoScreen.js";
 import EditTaskScreen from "../Screens/EditTaskScreen.js";
 import EditNoteScreen from "../Screens/EditNoteScreen.js";
 import ProjectScreen from "../Screens/ProjectScreen.js";
+import { AntDesign } from '@expo/vector-icons/AntDesign';
 
 const Stack = createStackNavigator();
 function StackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      {/* <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="CreateAccount" component={CreateAccScreen} />
       <Stack.Screen name="AddEmail" component={AddEmailVerify} />
-      <Stack.Screen name="Verify" component={EnterVerifyCode} />
+      <Stack.Screen name="Verify" component={EnterVerifyCode} /> */}
       <Stack.Screen name="Home" component={MyTabs} />
     </Stack.Navigator>
   );
@@ -56,7 +61,7 @@ function HomeScreenStackNavigator() {
   );
 }
 
-const CalendarStack = CalendarScreenStackNavigator();
+const CalendarStack = createStackNavigator();
 function CalendarScreenStackNavigator() {
   return (
     <CalendarStack.Navigator screenOptions={{ headerShown: false }}>
@@ -67,7 +72,7 @@ function CalendarScreenStackNavigator() {
   );
 }
 
-const CreateTaskStack = CreateTaskScreenStackNavigator();
+const CreateTaskStack = createStackNavigator();
 function CreateTaskScreenStackNavigator() {
   return (
     <CreateTaskStack.Navigator>
@@ -76,7 +81,7 @@ function CreateTaskScreenStackNavigator() {
   );
 }
 
-const AddNoteStack = AddNoteScreenStackNavigator();
+const AddNoteStack = createStackNavigator();
 function AddNoteScreenStackNavigator() {
   return (
     <AddNoteStack.Navigator>
@@ -85,7 +90,7 @@ function AddNoteScreenStackNavigator() {
   );
 }
 
-const NoteScreenStack = NoteScreenStackNavigator();
+const NoteScreenStack = createStackNavigator();
 function NoteScreenStackNavigator() {
   return (
     <NoteScreenStack.Navigator>
@@ -97,7 +102,7 @@ function NoteScreenStackNavigator() {
   );
 }
 
-const WorkSpaceScreenStack = WorkSpaceScreenStackNavigator();
+const WorkSpaceScreenStack = createStackNavigator();
 function WorkSpaceScreenStackNavigator() {
   return (
     <WorkSpaceScreenStack.Navigator>
@@ -118,50 +123,264 @@ function WorkSpaceScreenStackNavigator() {
   );
 }
 
+const OptionStackNavigator = createStackNavigator();
+function CreateOptionStackNavigator() {
+  return <OptionStackNavigator.Navigator></OptionStackNavigator.Navigator>;
+}
+
 const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        tabBarLabel: false,
+      screenOptions={({ route }) => ({
+        tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarStyle: [
           {
-            display: "flex",
-            position: "absolute",
+            position: "relative",
             bottom: 0,
             left: 0,
             right: 0,
             elevation: 0,
-            backgroundColor: "#ffffff",
-            borderRadius: 0,
-            height: Dimensions.get("window").height * 0.1,
+            backgroundColor: "#ECF0F1",
+            height: 70,
+            // height: Dimensions.get("window").height * 0.1,
             ...styles.shadow,
           },
           null,
         ],
-      }}
+      })}
     >
-      <Tab.Screen name="Home" component={HomeScreenStackNavigator}></Tab.Screen>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreenStackNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginBottom: 5,
+                marginTop: 7,
+              }}
+            >
+              {focused && (
+                <Feather
+                  name="home"
+                  size={28}
+                  color="#4B7BE5"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+              {!focused && (
+                <Feather
+                  name="home"
+                  size={24}
+                  color="black"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
       <Tab.Screen
         name="Calendar"
         component={CalendarScreenStackNavigator}
-      ></Tab.Screen>
-      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginBottom: 5,
+                marginTop: 7,
+              }}
+            >
+              {focused && (
+                <Feather
+                  name="calendar"
+                  size={28}
+                  color="#4B7BE5"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+              {!focused && (
+                <Feather
+                  name="calendar"
+                  size={24}
+                  color="black"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
+
+      <Tab.Group
+        name="Option"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginBottom: 5,
+                marginTop: 7,
+              }}
+            >
+              {focused && (
+                <AntDesign
+                  name="down"
+                  size={28}
+                  color="#4B7BE5"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+              {!focused && (
+                <Feather
+                  name="up"
+                  size={24}
+                  color="black"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
+      {/* <Tab.Screen
         name="AddTask"
         component={CreateTaskScreenStackNavigator}
-      ></Tab.Screen>
+        options={{          
+          tabBarIcon: ({ focused, color }) => (
+            <View style={{ alignItems: "flex-start", justifyContent: "center", marginBottom: 5 }}>
+              {focused && (
+                <View
+                  size={10}
+                  color="blue"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
       <Tab.Screen
         name="AddNote"
         component={AddNoteScreenStackNavigator}
-      ></Tab.Screen>
-      <Tab.Screen name="Note" component={NoteScreenStackNavigator}></Tab.Screen>
+        options={{          
+          tabBarIcon: ({ focused, color }) => (
+            <View style={{ alignItems: "flex-start", justifyContent: "center", marginBottom: 5 }}>
+              {focused && (
+                <View
+                  size={10}
+                  color="blue"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      /> */}
+
+      <Tab.Screen
+        name="Note"
+        component={NoteScreenStackNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginBottom: 5,
+                marginTop: 7,
+              }}
+            >
+              {focused && (
+                <FontAwesome
+                  name="sticky-note-o"
+                  size={28}
+                  color="#4B7BE5"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+              {!focused && (
+                <FontAwesome
+                  name="sticky-note-o"
+                  size={24}
+                  color="black"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
       <Tab.Screen
         name="Workspace"
         component={WorkSpaceScreenStackNavigator}
-      ></Tab.Screen>
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginBottom: 5,
+                marginTop: 7,
+              }}
+            >
+              {focused && (
+                <MaterialIcons
+                  name="workspaces-outline"
+                  size={28}
+                  color="#4B7BE5"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+              {!focused && (
+                <MaterialIcons
+                  name="workspaces-outline"
+                  size={24}
+                  color="black"
+                  resizeMode="contain"
+                  style={styles.tabIcon}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
 export default AppNavigator;
+
+const styles = StyleSheet.create({
+  tabIcon: {
+    // width: Dimensions.get("window").width * 0.08,
+    // height: Dimensions.get("window").height * 0.08,
+  },
+
+  shadow: {
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+  },
+});

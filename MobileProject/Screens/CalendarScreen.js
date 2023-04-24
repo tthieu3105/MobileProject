@@ -147,13 +147,13 @@ const CalendarScreen = () => {
       >
         <View style={styles.row}>
           {/* Button: back to previous screen */}
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <AntDesign
               name="left"
               size={30}
               style={styles.arrowIcon}
             ></AntDesign>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* Title */}
           <Text style={styles.title}>Schedule</Text>
         </View>
@@ -239,88 +239,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginLeft: 80,
+    marginLeft: "auto",
+    marginRight: "auto",
     color: "#363942",
     fontSize: 27,
     fontWeight: "bold",
 
     // fontStyle
-  },
-
-  smallTitle: {
-    marginLeft: 15,
-    marginRight: "auto",
-    color: "#363942",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginVertical: 10,
-    shadowOpacity: 0.2,
-    // fontStyle
-  },
-
-  normalTextOnBackGround: {
-    marginLeft: "auto",
-    marginRight: 30,
-    color: "black",
-    fontSize: 13,
-    textDecorationLine: "underline",
-  },
-
-  textInButton: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "white",
-    // fontFamily: "Poppins",
-    marginBottom: "auto",
-    marginTop: "auto",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-
-  button: {
-    // bordercolor: "white",
-    backgroundColor: "#4B7BE5",
-    marginTop: 15,
-    height: 50,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 10,
-    marginHorizontal: 15,
-    marginBottom: 30,
-  },
-
-  buttonCreateAccount: {
-    backgroundColor: "#81A3ED",
-    marginVertical: 15,
-    height: 50,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 10,
-    marginHorizontal: 30,
-  },
-
-  noteBox: {
-    backgroundColor: "#F5F5F5",
-    // marginVertical: 10,
-    marginTop: 5,
-    marginBottom: 10,
-    height: 340,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 0.5,
-    marginHorizontal: 15,
-  },
-
-  insertBox: {
-    backgroundColor: "#F5F5F5",
-    // marginVertical: 10,
-    marginTop: 5,
-    marginBottom: 10,
-    height: 45,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 0.5,
-    marginHorizontal: 15,
   },
 
   taskBox: {
@@ -331,7 +256,6 @@ const styles = StyleSheet.create({
     height: 55,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 0.5,
     marginLeft: 15,
     marginRight: 15,
   },
@@ -353,6 +277,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 130,
   },
+
   timeInTaskBox: {
     fontSize: 13,
     // fontFamily: "Poppins",
@@ -361,22 +286,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: "auto",
     color: "gray",
-  },
-
-  textInNoteBox: {
-    fontSize: 16,
-    // fontFamily: "Poppins",
-    marginBottom: "auto",
-    marginTop: 5,
-    marginLeft: 15,
-    marginRight: "auto",
-    height: 340,
-  },
-
-  separator: {
-    marginTop: 10,
-    marginRight: 25,
-    marginLeft: "auto",
   },
 
   container: {
@@ -400,11 +309,6 @@ const styles = StyleSheet.create({
     },
   },
 
-  taskFrame: {
-    marginLeft: 30,
-    marginRight: 15,
-  },
-
   taskName: {
     color: "#333",
     fontSize: 15,
@@ -420,6 +324,7 @@ const styles = StyleSheet.create({
     width: 43,
     height: 43,
   },
+
   dayText: {
     fontSize: 10,
     // fontWeight: "bold",

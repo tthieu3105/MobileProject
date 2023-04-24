@@ -9,7 +9,6 @@ import {
   Animated,
 } from "react-native";
 
-import RandomHologramColor from "../components/RandomHologramColor";
 import randomcolor from "randomcolor";
 import Constants from "expo-constants";
 import React, { Component, useRef } from "react";
@@ -147,7 +146,6 @@ const WorkSpaceScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            
           </View>
 
           <View style={{ backgroundColor: "white", flex: 80 }}>
