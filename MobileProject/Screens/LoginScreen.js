@@ -11,18 +11,31 @@ import {
 
 import React, { Component, useEffect, useRef } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { ScrollView } from "react-native-gesture-handler";
-import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
-import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import { Ionicons } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
-import UserAvatar from "@muhzi/react-native-user-avatar";
+import { useState } from "react";
+import CreateAccScreen from "./CreateAccScreen";
+import { useNavigation } from "react-router-native";
 
 const CONTAINER_HEIGHT = 80;
 
 const LoginScreen = () => {
+  // Sự kiện button
+  // const navigation = useNavigation();
+
+  // const handlePress = () => {
+  //   navigation.navigate("Profile");
+  // };
+
+  // Lấy Password
+  const [password, setPassword] = useState("");
+  const [hidePassword, setHidePassword] = useState(true);
+  const [showPasswordIcon, setShowPasswordIcon] = useState("eye-outline");
+
+  const toggleHidePassword = () => {
+    setHidePassword(!hidePassword);
+    setShowPasswordIcon(hidePassword ? "eye-off-outline" : "eye-outline");
+  };
+
   // Header Animation
   const scrollY = useRef(new Animated.Value(0)).current;
   const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -99,12 +112,24 @@ const LoginScreen = () => {
               ></TextInput>
             </View>
 
+            {/* Ô nhập password */}
             <View style={styles.insertBox1}>
-              <TextInput
-                style={styles.textInInsertBox}
-                placeholder="Password"
-                placeholderTextColor={Colors.placeholder}
-              ></TextInput>
+              <View style={styles.rowSection}>
+                <TextInput
+                  style={styles.textInInsertBox}
+                  placeholder="Password"
+                  placeholderTextColor={Colors.placeholder}
+                  autoCapitalize="none"
+                  secureTextEntry={hidePassword}
+                  value={password}
+                  onChangeText={(text) => setPassword(text)}
+                />
+
+                {/* Button hiển thị password */}
+                <TouchableOpacity onPress={toggleHidePassword}>
+                  <Ionicons name={showPasswordIcon} size={24} />
+                </TouchableOpacity>
+              </View>
             </View>
 
             <TouchableOpacity>
@@ -119,7 +144,10 @@ const LoginScreen = () => {
               <Text style={styles.textInButton}>Login</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonCreateAccount}>
+            <TouchableOpacity
+              style={styles.buttonCreateAccount}
+              // onPress={handlePress}
+            >
               <Text style={styles.textInButton}>Create account</Text>
             </TouchableOpacity>
           </View>
@@ -234,6 +262,13 @@ const styles = StyleSheet.create({
     marginTop: "auto",
     marginLeft: 15,
     marginRight: 15,
+  },
+
+  rowSection: {
+    flexDirection: "row",
+    marginBottom: "auto",
+    marginTop: "auto",
+    marginRight: 40,
   },
 });
 
