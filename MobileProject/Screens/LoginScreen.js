@@ -13,24 +13,18 @@ import React, { Component, useEffect, useRef } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 import CreateAccScreen from "./CreateAccScreen";
 import { useNavigation } from "react-router-native";
 
 const CONTAINER_HEIGHT = 80;
 
 const LoginScreen = ({ navigation }) => {
-  // Sự kiện button
-  // const navigation = useNavigation();
-
-  // const handlePress = () => {
-  //   navigation.navigate("Profile");
-  // };
-
-  // Lấy Password
+    // Lấy Password
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [showPasswordIcon, setShowPasswordIcon] = useState("eye-outline");
-
+  // Button hiển thị password
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword);
     setShowPasswordIcon(hidePassword ? "eye-off-outline" : "eye-outline");
@@ -83,6 +77,7 @@ const LoginScreen = ({ navigation }) => {
       enabled
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
+      <StatusBar barStyle="dark-content" />
       <Animated.ScrollView
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -108,6 +103,7 @@ const LoginScreen = ({ navigation }) => {
               <TextInput
                 style={styles.textInInsertBox}
                 placeholder="Username or Email"
+                multiline
                 placeholderTextColor={Colors.placeholder}
               ></TextInput>
             </View>
@@ -118,6 +114,7 @@ const LoginScreen = ({ navigation }) => {
                 <TextInput
                   style={styles.textInInsertBox}
                   placeholder="Password"
+                  // multiline
                   placeholderTextColor={Colors.placeholder}
                   autoCapitalize="none"
                   secureTextEntry={hidePassword}
@@ -256,6 +253,7 @@ const styles = StyleSheet.create({
 
   textInInsertBox: {
     fontSize: 16,
+    paddingTop:0,
     width: "90%",
     // fontFamily: "Poppins",
     marginBottom: "auto",

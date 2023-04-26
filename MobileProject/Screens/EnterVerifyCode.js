@@ -18,7 +18,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 const CONTAINER_HEIGHT = 80;
 
-const EnterVerifyCode = () => {
+const EnterVerifyCode = ({ navigation }) => {
   // Header Animation
   const scrollY = useRef(new Animated.Value(0)).current;
   const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -330,6 +330,7 @@ const styles = StyleSheet.create({
     marginTop: "auto",
     marginLeft: 15,
     marginRight: 15,
+    paddingTop: 0,
   },
 
   direction: {

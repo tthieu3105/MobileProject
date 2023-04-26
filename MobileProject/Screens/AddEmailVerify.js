@@ -18,7 +18,7 @@ import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 
 const CONTAINER_HEIGHT = 80;
 
-const AddEmailVerify = () => {
+const AddEmailVerify = ({ navigation }) => {
   // Header Animation
   const scrollY = useRef(new Animated.Value(0)).current;
   const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -120,7 +120,10 @@ const AddEmailVerify = () => {
             <Text style={styles.ContinueDirection}>
               receive a verification code
             </Text>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Verify")}
+            >
               <Text style={styles.textInButton}>Next</Text>
             </TouchableOpacity>
           </View>
@@ -251,6 +254,7 @@ const styles = StyleSheet.create({
     marginTop: "auto",
     marginLeft: 15,
     marginRight: 15,
+    paddingTop:0,
   },
 
   direction: {

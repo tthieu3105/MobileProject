@@ -16,10 +16,29 @@ import { ScrollView } from "react-native-gesture-handler";
 import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
 import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
+import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 const CONTAINER_HEIGHT = 80;
 
-const CreateAccScreen = () => {
+const CreateAccScreen = ({ navigation }) => {
+  // Lấy Password
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword2, setHidePassword2] = useState(true);
+  const [showPasswordIcon, setShowPasswordIcon] = useState("eye-outline");
+  const [showPasswordIcon2, setShowPasswordIcon2] = useState("eye-outline");
+  // Button hiển thị password
+  const toggleHidePassword = () => {
+    setHidePassword(!hidePassword);
+    setShowPasswordIcon(hidePassword ? "eye-off-outline" : "eye-outline");
+  };
+  const toggleHidePassword2 = () => {
+    setHidePassword2(!hidePassword2);
+    setShowPasswordIcon2(hidePassword2 ? "eye-off-outline" : "eye-outline");
+  };
+
   // Header Animation
   const scrollY = useRef(new Animated.Value(0)).current;
   const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -114,65 +133,100 @@ const CreateAccScreen = () => {
             <Text style={styles.smallTitle}>Name</Text>
 
             {/* Nhập first name */}
-            <TouchableOpacity style={styles.insertBox}>
+            <View style={styles.insertBox}>
               <TextInput
                 style={styles.textInInsertBox}
                 placeholder="First name"
+                multiline
                 placeholderTextColor={Colors.placeholder}
               ></TextInput>
-            </TouchableOpacity>
+            </View>
 
             {/* Nhập last name */}
-            <TouchableOpacity style={styles.insertBox}>
+            <View style={styles.insertBox}>
               <TextInput
                 style={styles.textInInsertBox}
                 placeholder="Last name"
+                multiline
                 placeholderTextColor={Colors.placeholder}
               ></TextInput>
-            </TouchableOpacity>
+            </View>
 
             {/* Layout thông tin account và button Next */}
             <View>
               <Text style={styles.smallTitle}>Account</Text>
 
               {/* Nhập email */}
-              <TouchableOpacity style={styles.insertBox}>
-                <TextInput
-                  style={styles.textInInsertBox}
-                  placeholder="Email"
-                  placeholderTextColor={Colors.placeholder}
-                ></TextInput>
-              </TouchableOpacity>
-
-              {/* Nhập username */}
-              <TouchableOpacity style={styles.insertBox}>
-                <TextInput
-                  style={styles.textInInsertBox}
-                  placeholder="Username"
-                  placeholderTextColor={Colors.placeholder}
-                ></TextInput>
-              </TouchableOpacity>
-
-              {/* Nhập Password */}
-              <TouchableOpacity style={styles.insertBox}>
-                <TextInput
-                  style={styles.textInInsertBox}
-                  placeholder="Password"
-                  placeholderTextColor={Colors.placeholder}
-                ></TextInput>
-              </TouchableOpacity>
-
-              {/* Nhập lại password (check xem có giống với phía trên) */}
               <View style={styles.insertBox}>
                 <TextInput
                   style={styles.textInInsertBox}
-                  placeholder="Confirm your password"
+                  placeholder="Email"
+                  multiline
                   placeholderTextColor={Colors.placeholder}
                 ></TextInput>
               </View>
 
+              {/* Nhập username */}
+              <View style={styles.insertBox}>
+                <TextInput
+                  style={styles.textInInsertBox}
+                  placeholder="Username"
+                  multiline
+                  placeholderTextColor={Colors.placeholder}
+                ></TextInput>
+              </View>
+
+              {/* Nhập Password */}
+              <View style={styles.insertBox}>
+                <View style={styles.rowSection}>
+                  <TextInput
+                    style={styles.textInInsertBox}
+                    placeholder="Password"
+                    // multiline
+                    placeholderTextColor={Colors.placeholder}
+                    autoCapitalize="none"
+                    secureTextEntry={hidePassword}
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                  />
+
+                  {/* Button hiển thị password */}
+                  <TouchableOpacity onPress={toggleHidePassword}>
+                    <Ionicons
+                      name={showPasswordIcon}
+                      size={24}
+                      style={{ marginLeft: "auto", marginRight: 15 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/* Nhập lại password (check xem có giống với phía trên) */}
+              <View style={styles.insertBox}>
+                <View style={styles.rowSection}>
+                  <TextInput
+                    style={styles.textInInsertBox}
+                    placeholder="Confirm your password"
+                    // multiline
+                    placeholderTextColor={Colors.placeholder}
+                    autoCapitalize="none"
+                    secureTextEntry={hidePassword2}
+                    value={password2}
+                    onChangeText={(text) => setPassword2(text)}
+                  />
+
+                  {/* Button hiển thị password */}
+                  <TouchableOpacity onPress={toggleHidePassword2}>
+                    <Ionicons name={showPasswordIcon2} size={24} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
               {/* Button: next */}
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("AddEmail")}
+              >
                 <Text style={styles.textInButton}>Next</Text>
               </TouchableOpacity>
             </View>
@@ -304,8 +358,25 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 
+  insertBox1: {
+    backgroundColor: "#F5F5F5",
+    marginVertical: 3,
+    height: 50,
+    borderRadius: 10,
+    shadowColor: "gray",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    marginHorizontal: 30,
+    marginTop: 15,
+  },
+
   textInInsertBox: {
     fontSize: 16,
+    paddingTop: 0,
+    width: "90%",
     // fontFamily: "Poppins",
     marginBottom: "auto",
     marginTop: "auto",
@@ -319,6 +390,14 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 10,
     marginHorizontal: 0,
+  },
+
+  rowSection: {
+    flexDirection: "row",
+
+    marginBottom: "auto",
+    marginTop: "auto",
+    marginRight: 40,
   },
 });
 
