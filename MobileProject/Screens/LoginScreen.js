@@ -18,7 +18,7 @@ import { useNavigation } from "react-router-native";
 
 const CONTAINER_HEIGHT = 80;
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   // Sự kiện button
   // const navigation = useNavigation();
 
@@ -146,7 +146,7 @@ const LoginScreen = () => {
 
             <TouchableOpacity
               style={styles.buttonCreateAccount}
-              // onPress={handlePress}
+              onPress={() => navigation.navigate("CreateAccount")}
             >
               <Text style={styles.textInButton}>Create account</Text>
             </TouchableOpacity>

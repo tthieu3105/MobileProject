@@ -9,6 +9,7 @@ import {
   StatusBar,
   Animated,
   KeyboardAvoidingView,
+  SafeAreaView,
 } from "react-native";
 import React, { Component, useEffect, useRef } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -79,10 +80,10 @@ export default function HomeScreen() {
     status3: "Overdue",
     icon: "star",
   };
-  // const headerItemsY = headerY.Animated.inter(scrollY, {
-  //   inputRange: [0, HEADER_HEIGHT],
-  // });
+  
+
   return (
+    
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
