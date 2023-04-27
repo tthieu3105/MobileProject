@@ -10,6 +10,8 @@ import AccountFeature from "../Screens/AccountFeature.js";
 import EditProfile from "../Screens/EditProfile.js";
 import NoteInforScreen from "../Screens/NoteInfoScreen.js";
 import WorkSpaceScreen from "../Screens/WorkSpaceScreen.js";
+import CreateTaskScreen from "../Screens/CreateTaskScreen.js";
+import TestScreen from "../Screens/TestScreen.js";
 
 const Stack = createStackNavigator();
 function StackNavigator() {
@@ -17,7 +19,7 @@ function StackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
-        component={WorkSpaceScreen}
+        component={CreateTaskScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
