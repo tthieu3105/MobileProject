@@ -40,8 +40,8 @@ function HomeScreenStackNavigator() {
       <HomeStack.Screen name="Notify" component={NotifyScreen} />
       <HomeStack.Screen name="AccountFeature" component={AccountFeature} />
       <HomeStack.Screen name="EditProfile" component={EditProfile} />
-      <HomeStack.Screen name="AddNote" component={AddNoteScreen} />
-      <HomeStack.Screen name="CreateTask" component={CreateTaskScreen} />
+      <HomeStack.Screen name="NewNote" component={AddNoteScreen} />
+      <HomeStack.Screen name="NewTask" component={CreateTaskScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -112,11 +112,7 @@ const NewTaskNoteScreenStack = createStackNavigator();
 function NewTaskNoteScreenStackNavigator() {
   return (
     <NewTaskNoteScreenStack.Navigator screenOptions={{ headerShown: false }}>
-      <NewTaskNoteScreenStack.Screen name="New" component={NewTaskNote} />
-      <NewTaskNoteScreenStack.Screen
-        name="NewTask"
-        component={CreateTaskScreen}
-      />
+      <NewTaskNoteScreenStack.Screen name="NewTask" component={CreateTaskScreen} />
       <NewTaskNoteScreenStack.Screen name="NewNote" component={AddNoteScreen} />
     </NewTaskNoteScreenStack.Navigator>
   );
@@ -232,7 +228,7 @@ function TabNavigator() {
 
       <Tab.Screen
         name="New"
-        component={HomeScreen}
+        component={NewTaskNoteScreenStackNavigator}
         options={{
           tabBarButton: () => (
             <AddButton opened={opened} toggleOpened={toggleOpened} />
@@ -325,7 +321,6 @@ const styles = StyleSheet.create({
   tabIcon: {
     width: 24,
     height: 24,
-
   },
 
   tabIcon2: {

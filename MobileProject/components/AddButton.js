@@ -36,7 +36,7 @@ const AddButton = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.box}>
         {/* Button AddNote */}
-        <TouchableOpacity onPress={() => navigation.navigate("AddNote")}>
+        <TouchableOpacity onPress={() => navigation.navigate("NewNote")}>
           <Animated.View
             style={[
               styles.item,
@@ -68,7 +68,7 @@ const AddButton = ({ navigation }) => {
         </TouchableOpacity>
 
         {/* Button AddTask */}
-        <TouchableOpacity onPress={() => navigation.navigate("CreateTask")}>
+        <TouchableOpacity onPress={() => navigation.navigate("NewNote")}>
           <Animated.View
             style={[
               styles.item,
