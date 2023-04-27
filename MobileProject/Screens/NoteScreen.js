@@ -15,6 +15,7 @@ import { Feather, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import NoteCard from "../components/NoteCard";
 import UserAvatar from "@muhzi/react-native-user-avatar";
+import TabContainer from "../components/TabContainer";
 const CONTAINER_HEIGHT = 80;
 
 export default function NoteScreen() {
@@ -70,109 +71,111 @@ export default function NoteScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-      enabled
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-    >
-      {/* Hiển thị trạng thái điện thoại */}
-      <StatusBar barStyle={"dark-content"} />
+    <TabContainer>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        enabled
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+      >
+        {/* Hiển thị trạng thái điện thoại */}
+        <StatusBar barStyle={"dark-content"} />
 
-      {/* Header */}
-      <Animated.View
-        style={[
-          styles.header,
-          { transform: [{ translateY: headerTranslate }] },
-        ]}
-      >
-        <View style={styles.rowSection}>
-          <TouchableOpacity style={styles.headerBehave}>
-            <SimpleLineIcons name="bell" size="30" color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerBehave}>
-            <UserAvatar
-              initialName="SK"
-              fontSize={15}
-              size={40}
-              rounded={true}
-              backgroundColors={["#4B7BE5"]}
-            />
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-      {/* End of Header */}
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
-      >
-        <View
-          style={{
-            marginTop: 80,
-          }}
+        {/* Header */}
+        <Animated.View
+          style={[
+            styles.header,
+            { transform: [{ translateY: headerTranslate }] },
+          ]}
         >
-          {/* Hello user */}
-          <Text style={styles.title}>Hello Josh</Text>
-          <Text style={styles.detailText}>May 27, 2022</Text>
+          <View style={styles.rowSection}>
+            <TouchableOpacity style={styles.headerBehave}>
+              <SimpleLineIcons name="bell" size="30" color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.headerBehave}>
+              <UserAvatar
+                initialName="SK"
+                fontSize={15}
+                size={40}
+                rounded={true}
+                backgroundColors={["#4B7BE5"]}
+              />
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+        {/* End of Header */}
+        <Animated.ScrollView
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
+        >
+          <View
+            style={{
+              marginTop: 80,
+            }}
+          >
+            {/* Hello user */}
+            <Text style={styles.title}>Hello Josh</Text>
+            <Text style={styles.detailText}>May 27, 2022</Text>
 
-          {/* SearchBox */}
-          <View style={styles.SearchBox}>
-            <TextInput
-              style={styles.textInSearchBox}
-              placeholder="Find your note"
-              placeholderTextColor={Colors.placeholder}
-            ></TextInput>
-            <TouchableOpacity>
-              <Feather name="search" size={24} color="#363942" />
-            </TouchableOpacity>
+            {/* SearchBox */}
+            <View style={styles.SearchBox}>
+              <TextInput
+                style={styles.textInSearchBox}
+                placeholder="Find your note"
+                placeholderTextColor={Colors.placeholder}
+              ></TextInput>
+              <TouchableOpacity>
+                <Feather name="search" size={24} color="#363942" />
+              </TouchableOpacity>
+            </View>
+            {/* End of SearchBox */}
+            <View style={styles.contentName}>
+              <Text style={{ fontSize: 20, fontWeight: 600 }}>My notes</Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "gray",
+                  marginHorizontal: 6,
+                }}
+              >
+                3
+              </Text>
+              <TouchableOpacity>
+                <FontAwesome name="sort" size={20} color="black" />
+              </TouchableOpacity>
+            </View>
+            <NoteCard
+              title={this.noteCard.tileName}
+              content={this.noteCard.contentCard}
+              date={this.noteCard.dateCard}
+            ></NoteCard>
+            <NoteCard
+              title={this.noteCard.tileName}
+              content={this.noteCard.contentCard}
+              date={this.noteCard.dateCard}
+            ></NoteCard>
+            <NoteCard
+              title={this.noteCard.tileName}
+              content={this.noteCard.contentCard}
+              date={this.noteCard.dateCard}
+            ></NoteCard>
+            <NoteCard
+              title={this.noteCard.tileName}
+              content={this.noteCard.contentCard}
+              date={this.noteCard.dateCard}
+            ></NoteCard>
+            <NoteCard
+              title={this.noteCard.tileName}
+              content={this.noteCard.contentCard}
+              date={this.noteCard.dateCard}
+            ></NoteCard>
           </View>
-          {/* End of SearchBox */}
-          <View style={styles.contentName}>
-            <Text style={{ fontSize: 20, fontWeight: 600 }}>My notes</Text>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 600,
-                color: "gray",
-                marginHorizontal: 6,
-              }}
-            >
-              3
-            </Text>
-            <TouchableOpacity>
-              <FontAwesome name="sort" size={20} color="black" />
-            </TouchableOpacity>
-          </View>
-          <NoteCard
-            title={this.noteCard.tileName}
-            content={this.noteCard.contentCard}
-            date={this.noteCard.dateCard}
-          ></NoteCard>
-          <NoteCard
-            title={this.noteCard.tileName}
-            content={this.noteCard.contentCard}
-            date={this.noteCard.dateCard}
-          ></NoteCard>
-          <NoteCard
-            title={this.noteCard.tileName}
-            content={this.noteCard.contentCard}
-            date={this.noteCard.dateCard}
-          ></NoteCard>
-          <NoteCard
-            title={this.noteCard.tileName}
-            content={this.noteCard.contentCard}
-            date={this.noteCard.dateCard}
-          ></NoteCard>
-          <NoteCard
-            title={this.noteCard.tileName}
-            content={this.noteCard.contentCard}
-            date={this.noteCard.dateCard}
-          ></NoteCard>
-        </View>
-      </Animated.ScrollView>
-    </KeyboardAvoidingView>
+        </Animated.ScrollView>
+      </KeyboardAvoidingView>
+    </TabContainer>
   );
 }
 

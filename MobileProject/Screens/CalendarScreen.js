@@ -12,6 +12,7 @@ import React, { Component, useRef } from "react";
 import { useState, useEffect } from "react";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 import axios from "axios";
+import TabContainer from "../components/TabContainer";
 
 const CONTAINER_HEIGHT = 80;
 
@@ -133,77 +134,79 @@ const CalendarScreen = () => {
   // End of header animation
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      enabled
-      style={{ backgroundColor: "white", flex: 100 }}
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-    >
-      <Animated.View
-        style={[
-          styles.header,
-          { transform: [{ translateY: headerTranslate }] },
-        ]}
+    <TabContainer>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        enabled
+        style={{ backgroundColor: "white", flex: 100 }}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
       >
-        <View style={styles.row}>
-          {/* Button: back to previous screen */}
-          {/* <TouchableOpacity>
+        <Animated.View
+          style={[
+            styles.header,
+            { transform: [{ translateY: headerTranslate }] },
+          ]}
+        >
+          <View style={styles.row}>
+            {/* Button: back to previous screen */}
+            {/* <TouchableOpacity>
             <AntDesign
               name="left"
               size={30}
               style={styles.arrowIcon}
             ></AntDesign>
           </TouchableOpacity> */}
-          {/* Title */}
-          <Text style={styles.title}>Schedule</Text>
-        </View>
-      </Animated.View>
-
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
-      >
-        <View
-          style={{
-            flex: 1,
-          }}
-        >
-          {/* Layout calendar */}
-          <View style={{ flex: 30, backgroundColor: "white" }}>
-            <View style={styles.container}>
-              <FlatList
-                horizontal={true} //Đặt flatList theo chiều ngang
-                showsHorizontalScrollIndicator={false} //Ẩn thanh cuộn ngang
-                data={[0, 1, 2, 3, 4, 5, 6]}
-                renderItem={renderDay}
-                keyExtractor={(item) => item.toString()} //Trích xuất khóa duy nhất cho mỗi phần tử trong dnah sách
-              />
-            </View>
+            {/* Title */}
+            <Text style={styles.title}>Schedule</Text>
           </View>
-          <View style={styles.line}></View>
+        </Animated.View>
 
-          {/* Layout hiển thị các task trong ngày đc chọn trên calendar */}
-          <View style={{ flex: 70, backgroundColor: "white" }}>
-            {/* <FlatList
+        <Animated.ScrollView
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
+        >
+          <View
+            style={{
+              flex: 1,
+            }}
+          >
+            {/* Layout calendar */}
+            <View style={{ flex: 30, backgroundColor: "white" }}>
+              <View style={styles.container}>
+                <FlatList
+                  horizontal={true} //Đặt flatList theo chiều ngang
+                  showsHorizontalScrollIndicator={false} //Ẩn thanh cuộn ngang
+                  data={[0, 1, 2, 3, 4, 5, 6]}
+                  renderItem={renderDay}
+                  keyExtractor={(item) => item.toString()} //Trích xuất khóa duy nhất cho mỗi phần tử trong dnah sách
+                />
+              </View>
+            </View>
+            <View style={styles.line}></View>
+
+            {/* Layout hiển thị các task trong ngày đc chọn trên calendar */}
+            <View style={{ flex: 70, backgroundColor: "white" }}>
+              {/* <FlatList
               data={task}
               renderItem={renderTask}
               keyExtractor={(item) => item.id}
               showsVerticalScrollIndicator={true}
             ></FlatList> */}
 
-            <View style={styles.container1}>
-              <Text style={styles.textInInsertBox}>8:00AM</Text>
-              <View style={styles.taskBox}>
-                <Text style={styles.textInTaskBox}>Continue Project</Text>
-                <Text style={styles.timeInTaskBox}>8:00AM - 10:00AM</Text>
+              <View style={styles.container1}>
+                <Text style={styles.textInInsertBox}>8:00AM</Text>
+                <View style={styles.taskBox}>
+                  <Text style={styles.textInTaskBox}>Continue Project</Text>
+                  <Text style={styles.timeInTaskBox}>8:00AM - 10:00AM</Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      </Animated.ScrollView>
-    </KeyboardAvoidingView>
+        </Animated.ScrollView>
+      </KeyboardAvoidingView>
+    </TabContainer>
   );
 };
 

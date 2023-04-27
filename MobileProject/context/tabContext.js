@@ -1,17 +1,20 @@
 import React from "react";
 
-const TabContext = React.createContext({ opened: false, setOpened: () => {} });
+const TabContext = React.createContext({
+  opened: false,
+  toggleOpened: () => {},
+});
 
-export const tabContextProvider = () => {
+export const TabContextProvider = ({ children }) => {
   const [opened, setOpened] = React.useState(false);
 
-  const toggleOpened = () =>{
-    setOpened(!opened)
-  }
+  const toggleOpened = () => {
+    setOpened(!opened);
+  };
 
-  return(
-    <TabContext.Provider value={{opened, toggleOpened}}>
-        {children}
+  return (
+    <TabContext.Provider value={{ opened, toggleOpened }}>
+      {children}
     </TabContext.Provider>
   );
 };

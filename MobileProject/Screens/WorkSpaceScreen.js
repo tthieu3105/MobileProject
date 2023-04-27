@@ -18,6 +18,7 @@ import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
 import UserAvatar from "@muhzi/react-native-user-avatar";
+import TabContainer from "../components/TabContainer";
 
 const CONTAINER_HEIGHT = 80;
 
@@ -78,111 +79,113 @@ const WorkSpaceScreen = () => {
   // End of header animation
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ backgroundColor: "white", flex: 100 }}
-      enabled
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-    >
-      <Animated.View
-        style={[
-          styles.header,
-          { transform: [{ translateY: headerTranslate }] },
-        ]}
+    <TabContainer>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ backgroundColor: "white", flex: 100 }}
+        enabled
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
       >
-        <View style={styles.row}>
-          {/* Button: back to previous screen */}
-          <TouchableOpacity>
-            <Ionicons
-              name="notifications-outline"
-              size={30}
-              style={styles.headerBehave}
-            ></Ionicons>
-          </TouchableOpacity>
+        <Animated.View
+          style={[
+            styles.header,
+            { transform: [{ translateY: headerTranslate }] },
+          ]}
+        >
+          <View style={styles.row}>
+            {/* Button: back to previous screen */}
+            <TouchableOpacity>
+              <Ionicons
+                name="notifications-outline"
+                size={30}
+                style={styles.headerBehave}
+              ></Ionicons>
+            </TouchableOpacity>
 
-          {/* small avatar */}
-          <View style={styles.headerBehave}>
-            <UserAvatar
-              size={40}
-              active
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2900&q=80"
-            />
+            {/* small avatar */}
+            <View style={styles.headerBehave}>
+              <UserAvatar
+                size={40}
+                active
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2900&q=80"
+              />
+            </View>
           </View>
-        </View>
-      </Animated.View>
+        </Animated.View>
 
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
-      >
-        <View style={{ flex: 1 }}>
-          {/* Layout welcome, ngày tháng, findbox */}
-          <View style={{ backgroundColor: "white", flex: 20 }}>
-            {/* Xử lý load tên người dùng + Hello */}
-            <Text style={styles.title}>Hello Josh</Text>
+        <Animated.ScrollView
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
+        >
+          <View style={{ flex: 1 }}>
+            {/* Layout welcome, ngày tháng, findbox */}
+            <View style={{ backgroundColor: "white", flex: 20 }}>
+              {/* Xử lý load tên người dùng + Hello */}
+              <Text style={styles.title}>Hello Josh</Text>
 
-            {/* Ngày tháng hiện tại */}
-            <Text style={styles.normalTextOnBackGround}>{currentDate}</Text>
+              {/* Ngày tháng hiện tại */}
+              <Text style={styles.normalTextOnBackGround}>{currentDate}</Text>
 
-            {/* Find box */}
-            <View style={styles.searchBox}>
-              <View style={styles.row1} marginTop={9}>
-                <TextInput
-                  width={"85%"}
-                  style={styles.textInSearchBox}
-                  placeholder="Find your project"
-                  placeholderTextColor={Colors.placeholder}
-                ></TextInput>
+              {/* Find box */}
+              <View style={styles.searchBox}>
+                <View style={styles.row1} marginTop={9}>
+                  <TextInput
+                    width={"85%"}
+                    style={styles.textInSearchBox}
+                    placeholder="Find your project"
+                    placeholderTextColor={Colors.placeholder}
+                  ></TextInput>
 
-                {/* Xử lý button tìm kiếm */}
+                  {/* Xử lý button tìm kiếm */}
+                  <TouchableOpacity>
+                    <AntDesign
+                      name="search1"
+                      size={25}
+                      style={styles.iconInSearchBox}
+                    ></AntDesign>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+
+            <View style={{ backgroundColor: "white", flex: 80 }}>
+              {/* Workspace */}
+
+              {/* Workspace title */}
+              <View style={styles.row1}>
+                <Text style={styles.smallTitle}>Workspace</Text>
+                {/* Đếm số lượng workspace người dùng đang có và load lên text tại đây */}
+                <Text style={styles.numberOfProject}>4</Text>
+
+                {/* Xử lý button sắp xếp project tại đây */}
                 <TouchableOpacity>
-                  <AntDesign
-                    name="search1"
-                    size={25}
-                    style={styles.iconInSearchBox}
-                  ></AntDesign>
+                  <Entypo name="select-arrows" size={22} color="black" />
                 </TouchableOpacity>
               </View>
-            </View>
-          </View>
 
-          <View style={{ backgroundColor: "white", flex: 80 }}>
-            {/* Workspace */}
+              {/* Projects */}
+              {/* Đếm số lượng workspace của người dùng và hiển thị các workspace của người dùng lên màn hình*/}
+              <View style={styles.projectFrame}>
+                {/* Tên & số lượng công việc */}
+                <View style={styles.smallFrame1}>
+                  {/* xử lý lấy tên và số lượng project từ BE, load lên text tại đây */}
+                  <Text style={styles.smallTitle2}>Web design</Text>
+                  <Text style={styles.numberOfProject2}>12 Projects</Text>
+                </View>
 
-            {/* Workspace title */}
-            <View style={styles.row1}>
-              <Text style={styles.smallTitle}>Workspace</Text>
-              {/* Đếm số lượng workspace người dùng đang có và load lên text tại đây */}
-              <Text style={styles.numberOfProject}>4</Text>
-
-              {/* Xử lý button sắp xếp project tại đây */}
-              <TouchableOpacity>
-                <Entypo name="select-arrows" size={22} color="black" />
-              </TouchableOpacity>
-            </View>
-
-            {/* Projects */}
-            {/* Đếm số lượng workspace của người dùng và hiển thị các workspace của người dùng lên màn hình*/}
-            <View style={styles.projectFrame}>
-              {/* Tên & số lượng công việc */}
-              <View style={styles.smallFrame1}>
-                {/* xử lý lấy tên và số lượng project từ BE, load lên text tại đây */}
-                <Text style={styles.smallTitle2}>Web design</Text>
-                <Text style={styles.numberOfProject2}>12 Projects</Text>
-              </View>
-
-              {/* Tiến độ hoàn thành & avatar thành viên */}
-              <View style={styles.smallFrame2}>
-                {/* Xử lý lấy tiến độ hoàn thành và load lên text & view */}
-                {/* Xử lý lấy avatar các thành viên trong workspace và load lên một vài avatar nhỏ */}
+                {/* Tiến độ hoàn thành & avatar thành viên */}
+                <View style={styles.smallFrame2}>
+                  {/* Xử lý lấy tiến độ hoàn thành và load lên text & view */}
+                  {/* Xử lý lấy avatar các thành viên trong workspace và load lên một vài avatar nhỏ */}
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      </Animated.ScrollView>
-    </KeyboardAvoidingView>
+        </Animated.ScrollView>
+      </KeyboardAvoidingView>
+    </TabContainer>
   );
 };
 

@@ -19,6 +19,7 @@ import HomeSection from "../components/HomeSection";
 import TaskCardOP from "../components/TaskCardProgress";
 import TaskCardCP from "../components/TaskCardCompleted";
 import TaskCardOD from "../components/TaskCardOverdue";
+import TabContainer from "../components/TabContainer";
 
 const CONTAINER_HEIGHT = 80;
 export default function HomeScreen({ navigation }) {
@@ -66,7 +67,7 @@ export default function HomeScreen({ navigation }) {
     sectionName2: "Completed",
     sectionName3: "Overdue",
   };
-  
+
   taskCard = {
     title1: "Landing Page Agency",
     subtitle1: "Webb Design",
@@ -78,135 +79,137 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-      enabled
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-    >
-      {/* Hiển thị trạng thái điện thoại */}
-      <StatusBar barStyle={"dark-content"} />
+    <TabContainer>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        enabled
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+      >
+        {/* Hiển thị trạng thái điện thoại */}
+        <StatusBar barStyle={"dark-content"} />
 
-      {/* Header */}
-      <Animated.View
-        style={[
-          styles.header,
-          { transform: [{ translateY: headerTranslate }] },
-        ]}
-      >
-        <View style={styles.rowSection}>
-          <TouchableOpacity style={styles.headerBehave}>
-            <SimpleLineIcons name="bell" size="30" color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.headerBehave}
-            onPress={() => navigation.navigate("AccountFeature")}
-          >
-            <UserAvatar
-              initialName="SK"
-              fontSize={15}
-              size={40}
-              rounded={true}
-              backgroundColors={["#4B7BE5"]}
-            />
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-      {/* End of Header */}
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
-      >
-        <View
-          style={{
-            marginTop: 80,
-          }}
+        {/* Header */}
+        <Animated.View
+          style={[
+            styles.header,
+            { transform: [{ translateY: headerTranslate }] },
+          ]}
         >
-          {/* Hello user */}
-          <Text style={styles.title}>Hello Josh</Text>
-          <Text style={styles.detailText}>May 27, 2022</Text>
-
-          {/* SearchBox */}
-          <View style={styles.SearchBox}>
-            <TextInput
-              style={styles.textInSearchBox}
-              placeholder="Find your task"
-              placeholderTextColor={Colors.placeholder}
-            ></TextInput>
-            <TouchableOpacity>
-              <Feather name="search" size={24} color="#363942" />
+          <View style={styles.rowSection}>
+            <TouchableOpacity style={styles.headerBehave}>
+              <SimpleLineIcons name="bell" size="30" color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.headerBehave}
+              onPress={() => navigation.navigate("AccountFeature")}
+            >
+              <UserAvatar
+                initialName="SK"
+                fontSize={15}
+                size={40}
+                rounded={true}
+                backgroundColors={["#4B7BE5"]}
+              />
             </TouchableOpacity>
           </View>
-        </View>
+        </Animated.View>
+        {/* End of Header */}
+        <Animated.ScrollView
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
+        >
+          <View
+            style={{
+              marginTop: 80,
+            }}
+          >
+            {/* Hello user */}
+            <Text style={styles.title}>Hello Josh</Text>
+            <Text style={styles.detailText}>May 27, 2022</Text>
 
-        {/* My Task */}
-        <HomeSection title={this.sectionInHome.sectionName}></HomeSection>
-        {/* TaskCard */}
-        <TaskCardOP
-          title={this.taskCard.title1}
-          subtitle={this.taskCard.subtitle1}
-          time={this.taskCard.time1}
-          status={this.taskCard.status1}
-          iconName={this.taskCard.icon}
-        ></TaskCardOP>
-        {/* End of TaskCard */}
+            {/* SearchBox */}
+            <View style={styles.SearchBox}>
+              <TextInput
+                style={styles.textInSearchBox}
+                placeholder="Find your task"
+                placeholderTextColor={Colors.placeholder}
+              ></TextInput>
+              <TouchableOpacity>
+                <Feather name="search" size={24} color="#363942" />
+              </TouchableOpacity>
+            </View>
+          </View>
 
-        {/* TaskCard */}
-        <TaskCardOP
-          title={this.taskCard.title1}
-          subtitle={this.taskCard.subtitle1}
-          time={this.taskCard.time1}
-          status={this.taskCard.status1}
-          iconName={this.taskCard.icon}
-        ></TaskCardOP>
-        {/* End of TaskCard */}
-        {/* End of My Task*/}
+          {/* My Task */}
+          <HomeSection title={this.sectionInHome.sectionName}></HomeSection>
+          {/* TaskCard */}
+          <TaskCardOP
+            title={this.taskCard.title1}
+            subtitle={this.taskCard.subtitle1}
+            time={this.taskCard.time1}
+            status={this.taskCard.status1}
+            iconName={this.taskCard.icon}
+          ></TaskCardOP>
+          {/* End of TaskCard */}
 
-        {/* Completed Section */}
-        <HomeSection title={this.sectionInHome.sectionName2}></HomeSection>
-        {/* TaskCard */}
-        <TaskCardCP
-          title={this.taskCard.title1}
-          subtitle={this.taskCard.subtitle1}
-          time={this.taskCard.time1}
-          status={this.taskCard.status2}
-        ></TaskCardCP>
-        {/* End of TaskCard */}
+          {/* TaskCard */}
+          <TaskCardOP
+            title={this.taskCard.title1}
+            subtitle={this.taskCard.subtitle1}
+            time={this.taskCard.time1}
+            status={this.taskCard.status1}
+            iconName={this.taskCard.icon}
+          ></TaskCardOP>
+          {/* End of TaskCard */}
+          {/* End of My Task*/}
 
-        {/* TaskCard */}
-        <TaskCardCP
-          title={this.taskCard.title1}
-          subtitle={this.taskCard.subtitle1}
-          time={this.taskCard.time1}
-          status={this.taskCard.status2}
-        ></TaskCardCP>
-        {/* End of TaskCard */}
-        {/* End of Completed Section */}
+          {/* Completed Section */}
+          <HomeSection title={this.sectionInHome.sectionName2}></HomeSection>
+          {/* TaskCard */}
+          <TaskCardCP
+            title={this.taskCard.title1}
+            subtitle={this.taskCard.subtitle1}
+            time={this.taskCard.time1}
+            status={this.taskCard.status2}
+          ></TaskCardCP>
+          {/* End of TaskCard */}
 
-        {/* Overdue Section */}
-        <HomeSection title={this.sectionInHome.sectionName3}></HomeSection>
-        {/* TaskCard */}
-        <TaskCardOD
-          title={this.taskCard.title1}
-          subtitle={this.taskCard.subtitle1}
-          time={this.taskCard.time1}
-          status={this.taskCard.status3}
-        ></TaskCardOD>
-        {/* End of TaskCard */}
+          {/* TaskCard */}
+          <TaskCardCP
+            title={this.taskCard.title1}
+            subtitle={this.taskCard.subtitle1}
+            time={this.taskCard.time1}
+            status={this.taskCard.status2}
+          ></TaskCardCP>
+          {/* End of TaskCard */}
+          {/* End of Completed Section */}
 
-        {/* TaskCard */}
-        <TaskCardOD
-          title={this.taskCard.title1}
-          subtitle={this.taskCard.subtitle1}
-          time={this.taskCard.time1}
-          status={this.taskCard.status3}
-        ></TaskCardOD>
-        {/* End of TaskCard */}
-        {/* End of Overdue Section */}
-      </Animated.ScrollView>
-    </KeyboardAvoidingView>
+          {/* Overdue Section */}
+          <HomeSection title={this.sectionInHome.sectionName3}></HomeSection>
+          {/* TaskCard */}
+          <TaskCardOD
+            title={this.taskCard.title1}
+            subtitle={this.taskCard.subtitle1}
+            time={this.taskCard.time1}
+            status={this.taskCard.status3}
+          ></TaskCardOD>
+          {/* End of TaskCard */}
+
+          {/* TaskCard */}
+          <TaskCardOD
+            title={this.taskCard.title1}
+            subtitle={this.taskCard.subtitle1}
+            time={this.taskCard.time1}
+            status={this.taskCard.status3}
+          ></TaskCardOD>
+          {/* End of TaskCard */}
+          {/* End of Overdue Section */}
+        </Animated.ScrollView>
+      </KeyboardAvoidingView>
+    </TabContainer>
   );
 }
 const styles = StyleSheet.create({

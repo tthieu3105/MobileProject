@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
     marginVertical: "auto",
     // width: 40,
     // height: 40,
-    tintColor: Colors.white,
   },
 
   box: {
