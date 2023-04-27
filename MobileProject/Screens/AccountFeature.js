@@ -10,10 +10,6 @@ import {
 } from "react-native";
 
 import React, { Component, useEffect, useRef } from "react";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { ScrollView } from "react-native-gesture-handler";
-import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
-import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import { Ionicons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -22,7 +18,7 @@ import UserAvatar from "@muhzi/react-native-user-avatar";
 
 const CONTAINER_HEIGHT = 80;
 
-const AccountFeature = () => {
+const AccountFeature = ({ navigation }) => {
   // Header Animation
   const scrollY = useRef(new Animated.Value(0)).current;
   const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -127,7 +123,10 @@ const AccountFeature = () => {
               <Text style={styles.userCareer}>UI/UX Designer</Text>
 
               {/* Button: Edit profile */}
-              <TouchableOpacity style={styles.buttonEditProfile}>
+              <TouchableOpacity
+                style={styles.buttonEditProfile}
+                onPress={() => navigation.navigate("EditProfile")}
+              >
                 <Text style={styles.textInButton1}>Edit profile</Text>
               </TouchableOpacity>
             </View>

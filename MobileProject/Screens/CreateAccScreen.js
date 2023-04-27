@@ -225,7 +225,7 @@ const CreateAccScreen = ({ navigation }) => {
               {/* Button: next */}
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("AddEmail")}
+                onPress={() => navigation.navigate("AccountFeature")}
               >
                 <Text style={styles.textInButton}>Next</Text>
               </TouchableOpacity>

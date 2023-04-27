@@ -30,18 +30,20 @@ import EditNoteScreen from "../Screens/EditNoteScreen.js";
 import ProjectScreen from "../Screens/ProjectScreen.js";
 import NewTaskNote from "../Screens/NewTaskNote.js";
 
+import { tabContextProvider, useTabMenu } from "../context/tabContext.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 import { Modal } from "react-native";
+import AddButton from "../components/AddButton.js";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      {/* <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="CreateAccount" component={CreateAccScreen} />
       <Stack.Screen name="AddEmail" component={AddEmailVerify} />
-      <Stack.Screen name="Verify" component={EnterVerifyCode} />
+      <Stack.Screen name="Verify" component={EnterVerifyCode} /> */}
       <Stack.Screen name="Home" component={MyTabs} />
     </Stack.Navigator>
   );
@@ -63,6 +65,8 @@ function HomeScreenStackNavigator() {
       <HomeStack.Screen name="Notify" component={NotifyScreen} />
       <HomeStack.Screen name="AccountFeature" component={AccountFeature} />
       <HomeStack.Screen name="EditProfile" component={EditProfile} />
+      <HomeStack.Screen name="AddNote" component={AddNoteScreen} />
+      <HomeStack.Screen name="CreateTask" component={CreateTaskScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -145,6 +149,8 @@ function NewTaskNoteScreenStackNavigator() {
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
+  const { opened, toggleOpened } = useTabMenu();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -202,6 +208,9 @@ function MyTabs() {
             </View>
           ),
         }}
+        // listeners={{
+        //   tabPress: (e) => opened && e.preventDefault(),
+        // }}
       />
       <Tab.Screen
         name="Calendar"
@@ -241,113 +250,11 @@ function MyTabs() {
 
       <Tab.Screen
         name="New"
-        component={NewTaskNoteScreenStackNavigator}
+        component={HomeScreen}
         options={{
-          tabBarIcon: ({ focused, color }) => (
-            <View
-              style={{
-                alignItems: "flex-start",
-                justifyContent: "center",
-                marginBottom: 5,
-                marginTop: 7,
-              }}
-            >
-              {focused && (
-                <AntDesign
-                  name="pluscircleo"
-                  size={28}
-                  color="#4B7BE5"
-                  resizeMode="contain"
-                  style={styles.tabIcon}
-                />
-              )}
-              {!focused && (
-                <AntDesign
-                  name="pluscircleo"
-                  size={26}
-                  color="black"
-                  resizeMode="contain"
-                  style={styles.tabIcon}
-                />
-              )}
-            </View>
-          ),
+          tabBarButton: () => <AddButton />,
         }}
       />
-
-      {/* <Tab.Screen
-        name="New Task"
-        component={CreateTaskScreenStackNavigator}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <View
-              style={{
-                alignItems: "flex-start",
-                justifyContent: "center",
-                marginBottom: 5,
-                marginTop: 7,
-              }}
-            >
-              {focused && (
-                <MaterialIcons
-                  
-                  name="add-task"
-                  size={28}
-                  color="#4B7BE5"
-                  resizeMode="contain"
-                  style={styles.tabIcon}
-                />
-              )}
-              {!focused && (
-                <MaterialIcons
-                  name="add-task"
-                  size={24}
-                  color="black"
-                  resizeMode="contain"
-                  style={styles.tabIcon}
-                />
-              )}
-            </View>
-          ),
-        }}
-      />
-      
-      <Tab.Screen
-        name="New Note"
-        component={AddNoteScreenStackNavigator}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <View
-              style={{
-                alignItems: "flex-start",
-                justifyContent: "center",
-                marginBottom: 5,
-                marginTop: 7,
-              }}
-            >
-              {focused && (
-                <MaterialIcons
-                  
-                  name="note-add"
-                  size={28}
-                  color="#4B7BE5"
-                  resizeMode="contain"
-                  style={styles.tabIcon}
-                />
-              )}
-              {!focused && (
-                <MaterialIcons
-                  name="note-add"
-                  size={24}
-                  color="black"
-                  resizeMode="contain"
-                  style={styles.tabIcon}
-                />
-              )}
-            </View>
-          ),
-        }}
-      /> */}
 
       <Tab.Screen
         name="Note"

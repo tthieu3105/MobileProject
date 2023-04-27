@@ -13,20 +13,15 @@ import {
 } from "react-native";
 import React, { Component, useEffect, useRef } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import EvilIcon from "@expo/vector-icons/EvilIcons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import UserAvatar from "@muhzi/react-native-user-avatar";
-import Constants from "expo-constants";
-import { ScrollView } from "react-native-gesture-handler";
-import { Dimensions } from "react-native";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import HomeSection from "../components/HomeSection";
 import TaskCardOP from "../components/TaskCardProgress";
 import TaskCardCP from "../components/TaskCardCompleted";
 import TaskCardOD from "../components/TaskCardOverdue";
-import Header from "../components/HeaderWithTextAndAvatar";
+
 const CONTAINER_HEIGHT = 80;
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   // Header Animation
   const scrollY = useRef(new Animated.Value(0)).current;
   const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -71,6 +66,7 @@ export default function HomeScreen() {
     sectionName2: "Completed",
     sectionName3: "Overdue",
   };
+  
   taskCard = {
     title1: "Landing Page Agency",
     subtitle1: "Webb Design",
@@ -80,10 +76,8 @@ export default function HomeScreen() {
     status3: "Overdue",
     icon: "star",
   };
-  
 
   return (
-    
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
@@ -104,7 +98,10 @@ export default function HomeScreen() {
           <TouchableOpacity style={styles.headerBehave}>
             <SimpleLineIcons name="bell" size="30" color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.headerBehave}>
+          <TouchableOpacity
+            style={styles.headerBehave}
+            onPress={() => navigation.navigate("AccountFeature")}
+          >
             <UserAvatar
               initialName="SK"
               fontSize={15}
