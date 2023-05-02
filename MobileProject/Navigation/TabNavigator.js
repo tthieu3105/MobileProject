@@ -229,11 +229,11 @@ function TabNavigator() {
       <Tab.Screen
         name="New"
         component={NewTaskNoteScreenStackNavigator}
-        options={{
+        options={({ navigation})=>({
           tabBarButton: () => (
-            <AddButton opened={opened} toggleOpened={toggleOpened} />
+            <AddButton navigation={navigation} opened={opened} toggleOpened={toggleOpened} />
           ),
-        }}
+        })}
       />
 
       <Tab.Screen

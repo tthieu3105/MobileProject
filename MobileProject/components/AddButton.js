@@ -9,7 +9,8 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 
 // const AddButton = (opened, toggleOpened) => {
 const AddButton = ({ navigation }) => {
@@ -68,7 +69,7 @@ const AddButton = ({ navigation }) => {
         </TouchableOpacity>
 
         {/* Button AddTask */}
-        <TouchableOpacity onPress={() => navigation.navigate("NewNote")}>
+        <TouchableOpacity onPress={() => navigation.navigate("NewTask")}>
           <Animated.View
             style={[
               styles.item,
