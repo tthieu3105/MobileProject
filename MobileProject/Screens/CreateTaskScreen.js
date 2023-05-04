@@ -229,7 +229,7 @@ export default function CreateTaskScreen() {
     } else {
       setDueDateVisible(true);
       Animated.timing(appearDuedate, {
-        toValue: 1,
+        toValue: dueDateVisible ? 1 : 0,
         duration: 800,
         useNativeDriver: true,
       }).start();

@@ -12,6 +12,14 @@ import NoteInforScreen from "../Screens/NoteInfoScreen.js";
 import WorkSpaceScreen from "../Screens/WorkSpaceScreen.js";
 import CreateTaskScreen from "../Screens/CreateTaskScreen.js";
 import TestScreen from "../Screens/TestScreen.js";
+import HomeScreen from "../Screens/HomeScreen.js";
+import MyTaskScreen from "../Screens/MyTaskScreen.js";
+import CompletedTaskScreen from "../Screens/CompletedTaskScreen.js";
+import OverdueTaskScreen from "../Screens/OverdueTaskScreen.js";
+import RecentlyAssignedScreen from "../Screens/RecentlyAssignedScreen.js";
+import AllTaskScreen from "../Screens/AllTaskScreen.js";
+import CompletedWSScreen from "../Screens/CompletedWSScreen.js";
+import OverdueWSScreen from "../Screens/OverdueWSScreen.js";
 
 const Stack = createStackNavigator();
 function StackNavigator() {
