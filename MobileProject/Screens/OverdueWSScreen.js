@@ -1,14 +1,14 @@
 import { Text, StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import React, { Component, useEffect } from "react";
 import { StatusBar, Animated } from "react-native";
-import Header from "../Components.js/HeaderWithTextAndAvatar";
+import Header from "../components/HeaderWithTextAndAvatar";
 import { ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { TextInput } from "react-native";
 import { Feather, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import HomeSection from "../Components.js/HomeSection";
-import TaskCard from "../Components.js/TaskCardOverdue";
+import HomeSection from "../components/HomeSection";
+import TaskCard from "../components/TaskCardOverdue";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRef } from "react";
 

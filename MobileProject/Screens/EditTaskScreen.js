@@ -14,9 +14,9 @@ import {
 } from "react-native";
 import React, { Component, useEffect, useRef, useState } from "react";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
-import Header from "../Components.js/HeaderWithTextAndIcon";
+import Header from "../components/HeaderWithTextAndIcon";
 import { MaterialIcons } from "@expo/vector-icons";
-import InputArea from "../Components.js/InputAreaForTask";
+import InputArea from "../components/InputAreaForTask";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { SelectList } from "react-native-dropdown-select-list";
 import DateTimePickerModal from "react-native-modal-datetime-picker";

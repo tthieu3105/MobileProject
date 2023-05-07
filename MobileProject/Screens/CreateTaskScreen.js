@@ -19,9 +19,9 @@ import {
   MaterialCommunityIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import Header from "../Components.js/HeaderWithTextAndAvatar";
+import Header from "../components/HeaderWithTextAndAvatar";
 import { MaterialIcons } from "@expo/vector-icons";
-import InputArea from "../Components.js/InputAreaForTask";
+import InputArea from "../components/InputAreaForTask";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import UserAvatar from "@muhzi/react-native-user-avatar";
 import { SelectList } from "react-native-dropdown-select-list";
