@@ -10,12 +10,12 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import React, { Component, useEffect, useRef } from "react";
-import Header from "../Components.js/HeaderWithTextAndAvatar";
+import Header from "../components/HeaderWithTextAndAvatar";
 import { Feather, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import NoteCard from "../Components.js/NoteCard";
+import NoteCard from "../components/NoteCard";
 import UserAvatar from "@muhzi/react-native-user-avatar";
-import TaskCardOD from "../Components.js/TaskCardOverdue";
+import TaskCardOD from "../components/TaskCardOverdue";
 
 const CONTAINER_HEIGHT = 80;
 
