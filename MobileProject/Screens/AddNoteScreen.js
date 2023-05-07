@@ -1,55 +1,121 @@
 import {
   View,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Animated,
 } from "react-native";
 
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import { useState, useEffect } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { ScrollView } from "react-native-gesture-handler";
-import FontAwesome from "../node_modules/@expo/vector-icons/FontAwesome";
-import EvilIcon from "../node_modules/@expo/vector-icons/EvilIcons";
 import AntDesign from "../node_modules/@expo/vector-icons/AntDesign";
+import UserAvatar from "@muhzi/react-native-user-avatar";
+
+const CONTAINER_HEIGHT = 80;
 
 const AddNoteScreen = () => {
   const [currentDate, setCurrentDate] = useState("");
-
   // Hiển thị ngày tháng năm hiện tại lên textView:
   useEffect(() => {
     // Lấy ngày tháng năm hiện tại và định dạng thành chuỗi
     const date = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
-
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-US", options);
     // Cập nhật state currentDate
     setCurrentDate(formattedDate);
   }, []);
 
+  // Header Animation
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const offsetAnim = useRef(new Animated.Value(0)).current;
+  const clampedScroll = Animated.diffClamp(
+    Animated.add(
+      scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: "clamp",
+      }),
+      offsetAnim
+    ),
+    0,
+    CONTAINER_HEIGHT
+  );
+
+  var _clampedScrollValue = 0;
+  var _offsetValue = 0;
+  var _scrollValue = 0;
+  useEffect(() => {
+    scrollY.addListener(({ value }) => {
+      const diff = value - _scrollValue;
+      _scrollValue = value;
+      _clampedScrollValue = Math.min(
+        Math.max(_clampedScrollValue * diff, 0),
+        CONTAINER_HEIGHT
+      );
+    });
+    offsetAnim.addListener(({ value }) => {
+      _offsetValue = value;
+    });
+  }, []);
+
+  const headerTranslate = clampedScroll.interpolate({
+    inputRange: [0, CONTAINER_HEIGHT],
+    outputRange: [0, -CONTAINER_HEIGHT],
+    extrapolate: "clamp",
+  });
+  // End of header animation
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
+      style={{ backgroundColor: "white" }}
       enabled
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <ScrollView>
+      <Animated.View
+        style={[
+          styles.header,
+          { transform: [{ translateY: headerTranslate }] },
+        ]}
+      >
+        <View style={styles.row}>
+          {/* Button: back to previous screen */}
+          <TouchableOpacity>
+            <AntDesign
+              name="left"
+              size={30}
+              style={styles.headerBehave}
+            ></AntDesign>
+          </TouchableOpacity>
+
+          {/* small avatar */}
+          <View style={styles.headerBehave}>
+            <UserAvatar
+              size={40}
+              active
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2900&q=80"
+            />
+          </View>
+        </View>
+      </Animated.View>
+
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
+      >
         <View style={{ backgroundColor: "white", flex: 1 }}>
           {/* Layout back button, small avatar, title of note, create date*/}
-          <View style={{ flex: 40, backgroundColor: "white" }}>
-            <View style={styles.row}>
-              {/* Button: back to previous screen */}
-              <TouchableOpacity>
-                <AntDesign name="left" size={30} style={styles.arrowIcon} />
-              </TouchableOpacity>
-
-              {/* small avatar */}
-            </View>
-
+          <View style={{ flex: 50, backgroundColor: "white", marginTop: 85 }}>
             {/* Title */}
             <Text style={styles.smallTitle}>Title</Text>
             <TouchableOpacity style={styles.insertBox}>
@@ -86,7 +152,7 @@ const AddNoteScreen = () => {
             <Text style={styles.textInButton}>Create a new note</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -96,34 +162,26 @@ const AddNoteScreen = () => {
 // };
 
 const styles = StyleSheet.create({
-  arrowIcon: {
-    marginTop: 45,
-    marginLeft: 10,
-    marginBottom: 30,
+  header: {
+    position: "absolute",
+    width: "100%",
+    height: CONTAINER_HEIGHT,
+    left: 0,
+    right: 0,
+    top: 0,
+    backgroundColor: "white",
+    zIndex: 1000,
+    elevation: 1000,
+  },
+
+  headerBehave: {
+    padding: 20,
+    marginTop: 25,
   },
 
   row: {
+    justifyContent: "space-between",
     flexDirection: "row",
-  },
-
-  image: {
-    height: 225,
-    width: 225,
-    alignItems: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 20,
-  },
-
-  title: {
-    marginLeft: 20,
-    marginRight: "auto",
-    color: "#363942",
-    fontSize: 27,
-    fontWeight: "bold",
-    marginTop: 45,
-    shadowOpacity: 0.2,
-    // fontStyle
   },
 
   smallTitle: {
@@ -133,16 +191,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginVertical: 10,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     // fontStyle
-  },
-
-  normalTextOnBackGround: {
-    marginLeft: "auto",
-    marginRight: 30,
-    color: "black",
-    fontSize: 13,
-    textDecorationLine: "underline",
   },
 
   textInButton: {
@@ -163,19 +217,13 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     shadowColor: "gray",
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
-    marginBottom: 30,
-  },
-
-  buttonCreateAccount: {
-    backgroundColor: "#81A3ED",
-    marginVertical: 15,
-    height: 50,
-    borderRadius: 10,
-    shadowColor: "gray",
-    shadowOpacity: 10,
-    marginHorizontal: 30,
+    marginBottom: 80,
   },
 
   noteBox: {
@@ -187,6 +235,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
   },
 
@@ -199,6 +251,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "gray",
     shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
     marginHorizontal: 15,
   },
 
@@ -208,7 +264,7 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     marginTop: "auto",
     marginLeft: 15,
-    marginRight: "auto",
+    marginRight: 15,
   },
 
   textInNoteBox: {
@@ -217,7 +273,7 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     marginTop: 5,
     marginLeft: 15,
-    marginRight: "auto",
+    marginRight: 15,
     height: 340,
   },
 });
