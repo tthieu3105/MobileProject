@@ -3,6 +3,9 @@ import { View, StyleSheet, Animated } from "react-native";
 import { useTabMenu } from "../context/tabContext";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
+
+//Testing
+
 const TabContainer = ({ children }) => {
   const { opened } = useTabMenu();
 
