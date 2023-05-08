@@ -1,44 +1,36 @@
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import LoginScreen from "../Screens/LoginScreen.js";
-import CreateAccScreen from "../Screens/CreateAccScreen.js";
-import AddEmailVerify from "../Screens/AddEmailVerify.js";
-import EnterVerifyCode from "../Screens/EnterVerifyCode.js";
-import AddNoteScreen from "../Screens/AddNoteScreen.js";
-import CalendarScreen from "../Screens/CalendarScreen.js";
-import AccountFeature from "../Screens/AccountFeature.js";
-import EditProfile from "../Screens/EditProfile.js";
-import NoteInforScreen from "../Screens/NoteInfoScreen.js";
-import WorkSpaceScreen from "../Screens/WorkSpaceScreen.js";
-import CreateTaskScreen from "../Screens/CreateTaskScreen.js";
-import TestScreen from "../Screens/TestScreen.js";
-import HomeScreen from "../Screens/HomeScreen.js";
-import MyTaskScreen from "../Screens/MyTaskScreen.js";
-import CompletedTaskScreen from "../Screens/CompletedTaskScreen.js";
-import OverdueTaskScreen from "../Screens/OverdueTaskScreen.js";
-import RecentlyAssignedScreen from "../Screens/RecentlyAssignedScreen.js";
-import AllTaskScreen from "../Screens/AllTaskScreen.js";
-import CompletedWSScreen from "../Screens/CompletedWSScreen.js";
-import OverdueWSScreen from "../Screens/OverdueWSScreen.js";
+import { TabContextProvider } from "../context/tabContext.js";
+import TabNavigator from "../Navigation/TabNavigator.js";
 
 const Stack = createStackNavigator();
-function StackNavigator() {
+
+const StackNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Welcome"
-        component={CreateTaskScreen}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="CreateAccount" component={CreateAccScreen} />
+      <Stack.Screen name="AddEmail" component={AddEmailVerify} />
+      <Stack.Screen name="Verify" component={EnterVerifyCode} />
+      <Stack.Screen name="Home" component={TabNavigator} />
     </Stack.Navigator>
   );
-}
+};
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <StackNavigator></StackNavigator>
-    </NavigationContainer>
+    <TabContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Root"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Root" component={TabNavigator} />
+          <Stack.Screen name="Begin" component={StackNavigator} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </TabContextProvider>
   );
 };
 
