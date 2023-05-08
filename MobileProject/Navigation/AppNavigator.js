@@ -9,10 +9,10 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="CreateAccount" component={CreateAccScreen} />
       <Stack.Screen name="AddEmail" component={AddEmailVerify} />
-      <Stack.Screen name="Verify" component={EnterVerifyCode} /> */}
+      <Stack.Screen name="Verify" component={EnterVerifyCode} />
       <Stack.Screen name="Home" component={TabNavigator} />
     </Stack.Navigator>
   );
