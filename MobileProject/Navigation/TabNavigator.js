@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Button, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Button, Dimensions, Modal } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
@@ -29,6 +29,10 @@ import NewTaskNote from "../Screens/NewTaskNote.js";
 import { tabContextProvider, useTabMenu } from "../context/tabContext.js";
 import AddButton from "../components/AddButton.js";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+
+
+
+//updating
 
 const Stack = createStackNavigator();
 
@@ -183,9 +187,9 @@ function TabNavigator() {
             </View>
           ),
         }}
-        // listeners={{
-        //   tabPress: (e) => opened && e.preventDefault(),
-        // }}
+        listeners={{
+          tabPress: (e) => opened && e.preventDefault(),
+        }}
       />
       <Tab.Screen
         name="Calendar"
@@ -221,17 +225,19 @@ function TabNavigator() {
             </View>
           ),
         }}
-        // listeners={{
-        //   tabPress: (e) => opened && e.preventDefault(),
-        // }}
+        listeners={{
+          tabPress: (e) => opened && e.preventDefault(),
+        }}
       />
 
       <Tab.Screen
         name="New"
         component={NewTaskNoteScreenStackNavigator}
         options={({ navigation})=>({
-          tabBarButton: () => (
-            <AddButton navigation={navigation} opened={opened} toggleOpened={toggleOpened} />
+          tabBarButton: ({focused}) => (
+            <AddButton navigation={navigation} opened={opened} toggleOpened={toggleOpened} >
+              
+            </AddButton>
           ),
         })}
       />
@@ -270,9 +276,9 @@ function TabNavigator() {
             </View>
           ),
         }}
-        // listeners={{
-        //   tabPress: (e) => opened && e.preventDefault(),
-        // }}
+        listeners={{
+          tabPress: (e) => opened && e.preventDefault(),
+        }}
       />
       <Tab.Screen
         name="Workspace"
@@ -308,9 +314,9 @@ function TabNavigator() {
             </View>
           ),
         }}
-        // listeners={{
-        //   tabPress: (e) => opened && e.preventDefault(),
-        // }}
+        listeners={{
+          tabPress: (e) => opened && e.preventDefault(),
+        }}
       />
     </Tab.Navigator>
   );
@@ -318,6 +324,8 @@ function TabNavigator() {
 export default TabNavigator;
 
 const styles = StyleSheet.create({
+  
+
   tabIcon: {
     width: 24,
     height: 24,

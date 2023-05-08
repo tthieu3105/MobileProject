@@ -3,6 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { TabContextProvider } from "../context/tabContext.js";
 import TabNavigator from "../Navigation/TabNavigator.js";
+import LoginScreen from "../Screens/LoginScreen.js";
+import CreateAccScreen from "../Screens/CreateAccScreen.js";
+import AddEmailVerify from "../Screens/AddEmailVerify.js";
+import EnterVerifyCode from "../Screens/EnterVerifyCode.js";
 
 const Stack = createStackNavigator();
 
@@ -22,13 +26,15 @@ const AppNavigator = () => {
   return (
     <TabContextProvider>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Root"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="Root" component={TabNavigator} />
-          <Stack.Screen name="Begin" component={StackNavigator} />
-        </Stack.Navigator>
+        <StackNavigator>
+          <Stack.Navigator
+            initialRouteName="Root"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="Begin" component={StackNavigator} />
+            <Stack.Screen name="Root" component={TabNavigator} />
+          </Stack.Navigator>
+        </StackNavigator>
       </NavigationContainer>
     </TabContextProvider>
   );

@@ -4,7 +4,7 @@ import { useTabMenu } from "../context/tabContext";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 
-//Testing
+//Updating
 
 const TabContainer = ({ children }) => {
   const { opened } = useTabMenu();
